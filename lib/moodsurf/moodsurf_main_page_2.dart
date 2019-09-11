@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MoodSurfMainPage extends StatefulWidget {
+class MoodSurfMainPage2 extends StatefulWidget {
 
   @override
   _MoodSurfMainPageState createState() => _MoodSurfMainPageState();
 }
 
-class _MoodSurfMainPageState extends State<MoodSurfMainPage> {
+class _MoodSurfMainPageState extends State<MoodSurfMainPage2> {
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +28,14 @@ class _MoodSurfMainPageState extends State<MoodSurfMainPage> {
     SizedBox(height: 100),
     Expanded(child:
     Container(
-      padding: EdgeInsets.all(32),
+      padding: EdgeInsets.only(left: 32.0, right: 300.0),
       width: double.infinity,
       child:
     Text("Begin by relaxing and focusing on your thoughts",
-    textAlign: TextAlign.center,
+
     style: TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: 28.0,
+    fontSize: 24.0,
     color: Colors.black)),
     ),
     ),
