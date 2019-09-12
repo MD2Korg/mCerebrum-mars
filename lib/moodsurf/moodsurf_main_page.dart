@@ -53,7 +53,7 @@ class _MoodSurfMainPageState extends State<MoodSurfMainPage> {
                   },
                 ),
                 trailing: IconButton(
-                  icon: Icon(Icons.keyboard_arrow_right, color: Colors.white,size: 40,),
+                  icon: Icon(Icons.keyboard_arrow_right, color: Colors.white,size: 24,),
                   onPressed: (){
 
                   },
