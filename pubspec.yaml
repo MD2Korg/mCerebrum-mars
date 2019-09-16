@@ -45,6 +45,7 @@ flutter:
     - assets/notice.png
     - assets/joy.png
     - assets/moodsurf_1.jpg
+    - assets/moodsurf_3.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 
@@ -56,6 +57,14 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: 'Lexend Exa'
+      fonts:
+        - asset: assets/LexendExa-Regular.ttf
+    - family: 'Lexend Deca'
+      fonts:
+        - asset: assets/LexendDeca-Regular.ttf
+
   # fonts:
   #   - family: Schyler
   #     fonts:

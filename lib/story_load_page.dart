@@ -2,18 +2,23 @@ import 'package:flutter/material.dart';
 
 class StoryLoadPage extends StatefulWidget {
   final String currentState;
+  final void Function(String, String) callback;
 
-  StoryLoadPage(this.currentState);
+  StoryLoadPage(this.currentState, this.callback);
   @override
   _StoryLoadPageState createState() => _StoryLoadPageState();
 }
 
-class _StoryLoadPageState extends State<StoryLoadPage> {
 
+class _StoryLoadPageState extends State<StoryLoadPage> {
+  @override
+  void initState(){
+    super.initState();
+    Future.delayed(Duration(seconds: 1),()=>widget.callback(widget.currentState, "next"));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF383636),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -22,7 +27,7 @@ class _StoryLoadPageState extends State<StoryLoadPage> {
             Container(padding: EdgeInsets.all(20),),
             Text(
               _getText(),
-                style: TextStyle(fontFamily: 'Roboto',color: Colors.white, fontSize: 20),
+                style: TextStyle(color: Colors.white),
             ),
           ],
         ),
