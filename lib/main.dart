@@ -14,7 +14,7 @@ void main() => runApp(MaterialApp(
     scaffoldBackgroundColor: const Color(0xFF383636),
     fontFamily: 'Lexend Deca',
     textTheme: TextTheme(
-      body1: TextStyle(fontSize: 22.0),
+      body1: TextStyle(fontSize: 20.0, letterSpacing: 1, wordSpacing: 4),
     )
   ),
   home: MainPage(),
@@ -26,7 +26,7 @@ class MainPage extends StatefulWidget{
   _MainPageState createState() => _MainPageState();
 }
 class _MainPageState extends State<MainPage>{
-  String curState="menu";
+  String curState="main_logo";
   MyState state = new MyState();
   void stateChanged(String prevState, String input){
     curState =  state.getNextState(prevState, input);

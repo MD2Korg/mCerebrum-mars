@@ -46,6 +46,7 @@ flutter:
     - assets/joy.png
     - assets/moodsurf_1.jpg
     - assets/moodsurf_3.png
+    - assets/imagine_logo.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 

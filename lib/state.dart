@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mars/imagine/imagine_1.dart';
+import 'package:mars/imagine/imagine_2.dart';
+import 'package:mars/imagine/imagine_intro.dart';
+import 'package:mars/main_logo.dart';
+import 'package:mars/meditate/meditate_intro.dart';
+import 'package:mars/meditate/meditate_menu.dart';
+import 'package:mars/meditate/meditate_response.dart';
 import 'package:mars/moodsurf/moodsurf_page_0.dart';
 import 'package:mars/moodsurf/moodsurf_page_1.dart';
 import 'package:mars/moodsurf/moodsurf_page_3.dart';
@@ -25,6 +32,8 @@ class MyState {
       case "notice_load":
       case "joy_load":
         return StoryLoadPage(state, callback);
+      case "main_logo":
+        return MainLogo(state, callback);
       case "moodsurf0":
         return MoodSurfPage0(state, callback);
       case "moodsurf1":
@@ -43,6 +52,22 @@ class MyState {
         return MoodSurfPage7(state, callback);
       case "moodsurf8":
         return MoodSurfPage8(state, callback);
+      case "meditate_menu":
+        return MeditateMenu(state,callback);
+      case "meditate_intro":
+        return MeditateIntro(state,callback);
+
+      case "imagine_intro":
+        return ImagineIntro(state,callback);
+
+      case "imagine_1":
+        return Imagine1(state,callback);
+
+      case "imagine_2":
+        return Imagine2(state,callback);
+
+      case "meditate_response":
+        return MeditateResponse(state,callback);
 
       case "menu":
         return Menu(state, callback);
@@ -68,6 +93,9 @@ class MyState {
 
   MyState() {
     transitions = new List();
+    transitions.add(Transition("main_logo", "next", "menu"));
+    transitions.add(Transition("main_logo", "back", "close"));
+
     transitions.add(Transition("load", "back", "close"));
     transitions.add(Transition("load", "next", "menu"));
 
@@ -99,25 +127,40 @@ class MyState {
     transitions.add(Transition("moodsurf7", "back", "moodsurf6"));
     transitions.add(Transition("moodsurf7", "next", "moodsurf8"));
     transitions.add(Transition("moodsurf8", "back", "moodsurf7"));
+    transitions.add(Transition("moodsurf8", "next", "menu"));
     transitions.add(Transition("moodsurf5", "up", "menu"));
     transitions.add(Transition("moodsurf5", "down", "menu"));
     transitions.add(Transition("moodsurf5", "next", "menu"));
     transitions.add(Transition("meditate_load", "back", "menu"));
-    transitions.add(Transition("meditate_load", "next", "meditate_option"));
-    transitions.add(Transition("meditate_option", "back", "menu"));
-    transitions.add(Transition("meditate_option", "rock", "meditate_intro"));
-    transitions.add(Transition("meditate_option", "wish", "meditate_intro"));
-    transitions.add(Transition("meditate_option", "space", "meditate_intro"));
-    transitions.add(Transition("meditate_option", "flow", "meditate_intro"));
-    transitions.add(Transition("meditate_option", "scan", "meditate_intro"));
-    transitions.add(Transition("meditate_option", "wave", "meditate_intro"));
-    transitions.add(Transition("meditate_intro", "back", "meditate_option"));
-    transitions.add(Transition("meditate_intro", "begin", "meditate_player"));
+    transitions.add(Transition("meditate_load", "next", "meditate_menu"));
+    transitions.add(Transition("meditate_menu", "back", "menu"));
+
+    transitions.add(Transition("meditate_menu", "back", "menu"));
+    transitions.add(Transition("meditate_menu", "next", "meditate_intro"));
+    transitions.add(Transition("meditate_intro", "back", "meditate_menu"));
+
+    transitions.add(Transition("meditate_menu", "rock", "meditate_intro"));
+    transitions.add(Transition("meditate_menu", "wish", "meditate_intro"));
+    transitions.add(Transition("meditate_menu", "space", "meditate_intro"));
+    transitions.add(Transition("meditate_menu", "flow", "meditate_intro"));
+    transitions.add(Transition("meditate_menu", "scan", "meditate_intro"));
+    transitions.add(Transition("meditate_menu", "wave", "meditate_intro"));
+    transitions.add(Transition("meditate_intro", "back", "meditate_menu"));
+    transitions.add(Transition("meditate_intro", "begin", "meditate_response"));
     transitions.add(Transition("meditate_player", "end", "meditate_rating"));
     transitions.add(Transition("meditate_rating", "back", "meditate_player"));
     transitions.add(Transition("meditate_rating", "up", "menu"));
     transitions.add(Transition("meditate_rating", "down", "menu"));
     transitions.add(Transition("meditate_rating", "next", "menu"));
+
+
+
+    transitions.add(Transition("imagine_load", "next", "imagine_intro"));
+
+    transitions.add(Transition("imagine_intro", "begin", "imagine_1"));
+    transitions.add(Transition("imagine_1", "next", "imagine_2"));
+
+
   }
 }
 

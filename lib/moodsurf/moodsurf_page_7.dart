@@ -15,7 +15,14 @@ class _MoodSurfPage7State extends State<MoodSurfPage7> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
+    return new WillPopScope(
+      onWillPop: (){
+        widget.callback(widget.curState, "back");
+        return new Future(() => false);
+      } ,
+      child:
+
+       Scaffold(
 
       body: Stack(
         children: <Widget>[
@@ -72,6 +79,7 @@ Container(padding: EdgeInsets.all(10),)
 
         ],
       ),
+       ),
     );
   }
 }

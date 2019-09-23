@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class MoodSurfPage8 extends StatefulWidget {
+class MeditateResponse extends StatefulWidget {
   final String curState;
   final void Function(String, String) callback;
 
-  MoodSurfPage8(this.curState, this.callback);
+  MeditateResponse(this.curState, this.callback);
 
   @override
-  _MoodSurfPage8State createState() => _MoodSurfPage8State();
+  _MeditateResponseState createState() => _MeditateResponseState();
 }
 
-class _MoodSurfPage8State extends State<MoodSurfPage8> {
+class _MeditateResponseState extends State<MeditateResponse> {
   bool isSelectedUp = false;
   bool isSelectedDown = false;
   @override
@@ -25,36 +25,43 @@ class _MoodSurfPage8State extends State<MoodSurfPage8> {
 
     Scaffold(
 
-      body: Stack(
-        children: <Widget>[
-          Center(
-            child: new Image.asset(
-              'assets/moodsurf_3.png',
-              width: size.width,
-              height: size.height,
+      body:
 
-              fit: BoxFit.cover,
-            ),
-          ),
+
+
+
+
+      //background image here
+
             Container(child: Column(children: <Widget>[
-    SizedBox(height: 200),
+              SizedBox(height: 200),
+              Image.asset(
+                'assets/meditate.png',
+                width: 70,
+                height: 70,
+              ),
+
     Expanded(child:Column(children: <Widget>[
     Container(
-      padding: EdgeInsets.all(45),
+      padding: EdgeInsets.all(30),
       width: double.infinity,
     ),
     Text("was this experience useful?",
     textAlign: TextAlign.center,
     style: TextStyle(
-    color: Colors.black)),
+    color: Colors.white)),
+      Container(
+        padding: EdgeInsets.all(10),
+        width: double.infinity,
+      ),
       Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-        isSelectedDown? IconButton(icon: Icon(Icons.thumb_down, color: Colors.white, size: 50), onPressed: (){
+        isSelectedDown? IconButton(icon: Icon(Icons.thumb_down, color: Colors.purple, size: 50), onPressed: (){
           isSelectedDown=!isSelectedDown;
           if(isSelectedDown==true) isSelectedUp=false;
           setState(() {
 
           });
-        }):IconButton(icon: Icon(Icons.thumb_down, size: 50, color: Colors.lightBlue,), onPressed: (){
+        }):IconButton(icon: Icon(Icons.thumb_down, size: 50, color: Colors.grey,), onPressed: (){
           isSelectedDown=!isSelectedDown;
           if(isSelectedDown==true) isSelectedUp=false;
           setState(() {
@@ -63,13 +70,13 @@ class _MoodSurfPage8State extends State<MoodSurfPage8> {
 
         }),
         SizedBox(width: 50,),
-        isSelectedUp? IconButton(icon: Icon(Icons.thumb_up, color: Colors.white, size: 50), onPressed: (){
+        isSelectedUp? IconButton(icon: Icon(Icons.thumb_up, color: Colors.purple, size: 50), onPressed: (){
           isSelectedUp=!isSelectedUp;
           if(isSelectedUp==true) isSelectedDown=false;
           setState(() {
 
           });
-        }):IconButton(icon: Icon(Icons.thumb_up, size: 50, color: Colors.lightBlue,), onPressed: (){
+        }):IconButton(icon: Icon(Icons.thumb_up, size: 50, color: Colors.grey,), onPressed: (){
           isSelectedUp=!isSelectedUp;
           if(isSelectedUp==true) isSelectedDown=false;
           setState(() {
@@ -81,9 +88,6 @@ class _MoodSurfPage8State extends State<MoodSurfPage8> {
     ],)
 
     ),
-              Padding(
-                padding: EdgeInsets.all(100),
-              ),
               Row(
                 children: <Widget>[
                   Expanded(child:IconButton(alignment: Alignment.bottomLeft,
@@ -111,9 +115,6 @@ class _MoodSurfPage8State extends State<MoodSurfPage8> {
               Container(padding: EdgeInsets.all(10),)
             ],)
             ),
-
-        ],
-      ),
     ),
     );
   }
