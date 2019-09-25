@@ -16,6 +16,9 @@ import 'package:mars/moodsurf/moodsurf_page_4.dart';
 import 'package:mars/moodsurf/moodsurf_page_5.dart';
 import 'package:mars/moodsurf/moodsurf_page_6.dart';
 import 'package:mars/moodsurf/moodsurf_page_7.dart';
+import 'package:mars/notice/notice_begin.dart';
+import 'package:mars/notice/notice_experience.dart';
+import 'package:mars/notice/notice_intro.dart';
 import 'package:mars/story_load_page.dart';
 
 import 'menu.dart';
@@ -81,6 +84,14 @@ class MyState {
       case "imagine_like":
         return ImagineLike(state,callback);
 
+      case "notice_begin":
+        return NoticeBegin(state,callback);
+
+      case "notice_intro":
+        return NoticeIntro(state,callback);
+
+      case "notice_experience":
+        return NoticeExperience(state,callback);
 
 
       case "menu":
@@ -177,6 +188,11 @@ class MyState {
 
     transitions.add(Transition("imagine_response", "next", "imagine_color_q"));
     transitions.add(Transition("imagine_color_q", "next", "imagine_like"));
+
+    //notice
+    transitions.add(Transition("notice_load", "next", "notice_begin"));
+    transitions.add(Transition("notice_begin", "next", "notice_intro"));
+    transitions.add(Transition("notice_intro", "next", "notice_experience"));
 
   }
 }
