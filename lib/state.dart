@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mars/imagine/imagine_1.dart';
 import 'package:mars/imagine/imagine_2.dart';
+import 'package:mars/imagine/imagine_color_q.dart';
 import 'package:mars/imagine/imagine_intro.dart';
+import 'package:mars/imagine/imagine_like.dart';
+import 'package:mars/imagine/imagine_response.dart';
 import 'package:mars/main_logo.dart';
 import 'package:mars/meditate/meditate_intro.dart';
 import 'package:mars/meditate/meditate_menu.dart';
@@ -68,6 +71,17 @@ class MyState {
 
       case "meditate_response":
         return MeditateResponse(state,callback);
+
+      case "imagine_response":
+        return ImagineResponse(state,callback);
+
+      case "imagine_color_q":
+        return ImagineColorQ(state,callback);
+
+      case "imagine_like":
+        return ImagineLike(state,callback);
+
+
 
       case "menu":
         return Menu(state, callback);
@@ -159,7 +173,10 @@ class MyState {
 
     transitions.add(Transition("imagine_intro", "begin", "imagine_1"));
     transitions.add(Transition("imagine_1", "next", "imagine_2"));
+    transitions.add(Transition("imagine_2", "next", "imagine_response"));
 
+    transitions.add(Transition("imagine_response", "next", "imagine_color_q"));
+    transitions.add(Transition("imagine_color_q", "next", "imagine_like"));
 
   }
 }
