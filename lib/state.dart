@@ -17,8 +17,13 @@ import 'package:mars/moodsurf/moodsurf_page_5.dart';
 import 'package:mars/moodsurf/moodsurf_page_6.dart';
 import 'package:mars/moodsurf/moodsurf_page_7.dart';
 import 'package:mars/notice/notice_begin.dart';
+import 'package:mars/notice/notice_conclusion.dart';
 import 'package:mars/notice/notice_experience.dart';
+import 'package:mars/notice/notice_experience_detail.dart';
+import 'package:mars/notice/notice_experience_q.dart';
+import 'package:mars/notice/notice_experience_q2.dart';
 import 'package:mars/notice/notice_intro.dart';
+import 'package:mars/notice/notice_like.dart';
 import 'package:mars/story_load_page.dart';
 
 import 'menu.dart';
@@ -92,6 +97,21 @@ class MyState {
 
       case "notice_experience":
         return NoticeExperience(state,callback);
+
+      case "notice_experience_q":
+        return NoticeExperienceQ(state,callback);
+
+      case "notice_experience_q2":
+        return NoticeExperienceQ2(state,callback);
+
+      case "notice_experience_detail":
+        return NoticeExperienceDetail(state,callback);
+
+      case "notice_conclusion":
+        return NoticeConclusion(state,callback);
+
+      case "notice_like":
+        return NoticeLike(state,callback);
 
 
       case "menu":
@@ -172,27 +192,66 @@ class MyState {
     transitions.add(Transition("meditate_menu", "wave", "meditate_intro"));
     transitions.add(Transition("meditate_intro", "back", "meditate_menu"));
     transitions.add(Transition("meditate_intro", "begin", "meditate_response"));
+    transitions.add(Transition("meditate_intro", "next", "meditate_response"));
     transitions.add(Transition("meditate_player", "end", "meditate_rating"));
     transitions.add(Transition("meditate_rating", "back", "meditate_player"));
     transitions.add(Transition("meditate_rating", "up", "menu"));
     transitions.add(Transition("meditate_rating", "down", "menu"));
     transitions.add(Transition("meditate_rating", "next", "menu"));
+    transitions.add(Transition("meditate_response", "next", "menu"));
 
-
-
+//imagine
     transitions.add(Transition("imagine_load", "next", "imagine_intro"));
+    transitions.add(Transition("imagine_intro", "back", "imagine_load"));
 
     transitions.add(Transition("imagine_intro", "begin", "imagine_1"));
+    transitions.add(Transition("imagine_1", "back", "imagine_intro"));
+
+    transitions.add(Transition("imagine_intro", "next", "imagine_1"));
+
     transitions.add(Transition("imagine_1", "next", "imagine_2"));
+    transitions.add(Transition("imagine_2", "back", "imagine_1"));
+
     transitions.add(Transition("imagine_2", "next", "imagine_response"));
+    transitions.add(Transition("imagine_response", "back", "imagine_2"));
 
     transitions.add(Transition("imagine_response", "next", "imagine_color_q"));
+    transitions.add(Transition("imagine_color_q", "back", "imagine_response"));
+
     transitions.add(Transition("imagine_color_q", "next", "imagine_like"));
+    transitions.add(Transition("imagine_like", "back", "imagine_color_q"));
+
+    transitions.add(Transition("imagine_like", "next", "menu"));
 
     //notice
     transitions.add(Transition("notice_load", "next", "notice_begin"));
+    transitions.add(Transition("notice_begin", "back", "menu"));
+
     transitions.add(Transition("notice_begin", "next", "notice_intro"));
+    transitions.add(Transition("notice_begin", "begin", "notice_intro"));
+    transitions.add(Transition("notice_intro", "back", "notice_begin"));
+
     transitions.add(Transition("notice_intro", "next", "notice_experience"));
+    transitions.add(Transition("notice_experience", "back", "notice_intro"));
+
+    transitions.add(Transition("notice_experience", "next", "notice_experience_detail"));
+    transitions.add(Transition("notice_experience_detail", "back", "notice_experience"));
+
+
+    transitions.add(Transition("notice_experience_detail", "next", "notice_experience_q"));
+    transitions.add(Transition("notice_experience_q", "back", "notice_experience_detail"));
+    transitions.add(Transition("notice_experience_q", "next", "notice_experience_q2"));
+    transitions.add(Transition("notice_experience_q2", "back", "notice_experience_q"));
+
+
+    transitions.add(Transition("notice_experience_q2", "next", "notice_conclusion"));
+    transitions.add(Transition("notice_conclusion", "back", "notice_experience_q2"));
+
+    transitions.add(Transition("notice_conclusion", "next", "notice_like"));
+    transitions.add(Transition("notice_like", "back", "notice_conclusion"));
+
+    transitions.add(Transition("notice_like", "next", "menu"));
+
 
   }
 }

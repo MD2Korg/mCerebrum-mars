@@ -1,13 +1,35 @@
 import 'package:flutter/material.dart';
 
-class NoticeExperience extends StatelessWidget {
+class NoticeExperience extends StatefulWidget {
   final String curState;
   final void Function(String, String) callback;
-  int sl=0;
+  final Map<String, bool> map = {
+    'tension': false,
+    'calmness': false,
+    'shakiness': false,
+    'stillness': false,
+    'pain': false,
+    'joy': false,
+    'cig_craving': false,
+    'contentment': false,
+    'restlessness': false,
+    'fluttering': false,
+    'irritability': false,
+    'excitement': false,
+    'other_physical_sensation': false,
+  };
 
-  NoticeExperience(this.curState, this.callback);
+  int noneOfThemAbove = 0;
+    NoticeExperience(this.curState, this.callback);
 
   @override
+  _NoticeExperienceState createState() => _NoticeExperienceState();
+}
+
+class _NoticeExperienceState extends State<NoticeExperience> {
+
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: _myListView(context),
@@ -58,7 +80,7 @@ class NoticeExperience extends StatelessWidget {
                     width: 130.0,
                     child: SizedBox(
                       child: RaisedButton(
-                        color: Colors.white,
+                        color: widget.map["tension"]==true?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
                         child: Text(
                           'tension',
@@ -66,7 +88,13 @@ class NoticeExperience extends StatelessWidget {
                           style: TextStyle(color: Colors.black),
                         ),
                         onPressed: ()  {
-                          sl=1;
+                          bool res = widget.map["tension"];
+                          widget.map["tension"]=!res;
+                          widget.noneOfThemAbove=-1;
+                          setState(() {
+
+                          });
+
                           //  widget.callback(widget.curState, "wish"),
                         },
                       ),
@@ -78,18 +106,23 @@ class NoticeExperience extends StatelessWidget {
                     width: 130.0,
                     child: SizedBox(
                         child:RaisedButton(
-                          // background: Colors.pink[300],
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
+                          color: widget.map["calmness"]==true?Colors.deepOrangeAccent[100]: Colors.white,
+                          shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
                           child: Text(
                             'calmness',
                             textAlign: TextAlign.center,
                             style: TextStyle(color: Colors.black),
                           ),
-                          onPressed: () {
-                            sl=1;
+                          onPressed: ()  {
+                            bool res = widget.map["calmness"];
+                            widget.map["calmness"]=!res;
+                            widget.noneOfThemAbove=-1;
+                            setState(() {
 
-                          }
+                            });
+
+                            //  widget.callback(widget.curState, "wish"),
+                          },
                         ),
                     ),
                   ),
@@ -107,15 +140,21 @@ class NoticeExperience extends StatelessWidget {
                     width: 130.0,
                     child: SizedBox(
                       child: RaisedButton(
-                        color: Colors.white,
+                        color: widget.map["shakiness"]==true?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        // background: Colors.pink[300],
                         child: Text(
                           'shakiness',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () => {
+                        onPressed: ()  {
+                          bool res = widget.map["shakiness"];
+                          widget.map["shakiness"]=!res;
+                          widget.noneOfThemAbove=-1;
+                          setState(() {
+
+                          });
+
                           //  widget.callback(widget.curState, "wish"),
                         },
                       ),
@@ -127,18 +166,23 @@ class NoticeExperience extends StatelessWidget {
                     width: 130.0,
                     child: SizedBox(
                       child:RaisedButton(
-                        // background: Colors.pink[300],
-                        color: Colors.white,
+                        color: widget.map["stillness"]==true?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
                         child: Text(
                           'stillness',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () => {
+                        onPressed: ()  {
+                          bool res = widget.map["stillness"];
+                          widget.map["stillness"]=!res;
+                          widget.noneOfThemAbove=-1;
+                          setState(() {
+
+                          });
+
                           //  widget.callback(widget.curState, "wish"),
-                        },
-                      ),
+                        },),
                     ),
                   ),
 
@@ -154,15 +198,21 @@ class NoticeExperience extends StatelessWidget {
                     width: 130.0,
                     child: SizedBox(
                       child: RaisedButton(
-                        color: Colors.white,
+                        color: widget.map["pain"]==true?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        // background: Colors.pink[300],
                         child: Text(
                           'pain',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () => {
+                        onPressed: ()  {
+                          bool res = widget.map["pain"];
+                          widget.map["pain"]=!res;
+                          widget.noneOfThemAbove=-1;
+                          setState(() {
+
+                          });
+
                           //  widget.callback(widget.curState, "wish"),
                         },
                       ),
@@ -173,18 +223,23 @@ class NoticeExperience extends StatelessWidget {
                     width: 130.0,
                     child: SizedBox(
                       child:RaisedButton(
-                        color: Colors.white,
+                        color: widget.map["joy"]==true?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        // background: Colors.pink[300],
                         child: Text(
                           'joy',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () => {
+                        onPressed: ()  {
+                          bool res = widget.map["joy"];
+                          widget.map["joy"]=!res;
+                          widget.noneOfThemAbove=-1;
+                          setState(() {
+
+                          });
+
                           //  widget.callback(widget.curState, "wish"),
-                        },
-                      ),
+                        },),
                     ),
                   ),
 
@@ -200,15 +255,21 @@ class NoticeExperience extends StatelessWidget {
                     width: 130.0,
                     child: SizedBox(
                       child: RaisedButton(
-                        color: Colors.white,
+                        color: widget.map["cig_craving"]==true?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        // background: Colors.pink[300],
                         child: Text(
                           'cig craving',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () => {
+                        onPressed: ()  {
+                          bool res = widget.map["cig_craving"];
+                          widget.map["cig_craving"]=!res;
+                          widget.noneOfThemAbove=-1;
+                          setState(() {
+
+                          });
+
                           //  widget.callback(widget.curState, "wish"),
                         },
                       ),
@@ -221,15 +282,21 @@ class NoticeExperience extends StatelessWidget {
                     width: 130.0,
                     child: SizedBox(
                       child: RaisedButton(
-                        color: Colors.white,
+                        color: widget.map["contentment"]==true?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        // background: Colors.pink[300],
                         child: Text(
                           'contentment',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () => {
+                        onPressed: ()  {
+                          bool res = widget.map["contentment"];
+                          widget.map["contentment"]=!res;
+                          widget.noneOfThemAbove=-1;
+                          setState(() {
+
+                          });
+
                           //  widget.callback(widget.curState, "wish"),
                         },
                       ),
@@ -248,18 +315,23 @@ class NoticeExperience extends StatelessWidget {
                     width: 130.0,
                     child: SizedBox(
                       child: RaisedButton(
-                        color: Colors.white,
+                        color: widget.map["restlessness"]==true?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        // background: Colors.pink[300],
                         child: Text(
                           'restlessness',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () => {
+                        onPressed: ()  {
+                          bool res = widget.map["restlessness"];
+                          widget.map["restlessness"]=!res;
+                          widget.noneOfThemAbove=-1;
+                          setState(() {
+
+                          });
+
                           //  widget.callback(widget.curState, "wish"),
-                        },
-                      ),
+                        },                      ),
                     ),
                   ),
 
@@ -267,16 +339,21 @@ class NoticeExperience extends StatelessWidget {
                     height: 40.0,
                     width: 130.0,
                     child: SizedBox(
-                      child: RaisedButton(
-                        color: Colors.white,
+                      child: RaisedButton( color: widget.map["fluttering"]==true?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        // background: Colors.pink[300],
                         child: Text(
                           'fluttering',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () => {
+                        onPressed: ()  {
+                          bool res = widget.map["fluttering"];
+                          widget.map["fluttering"]=!res;
+                          widget.noneOfThemAbove=-1;
+                          setState(() {
+
+                          });
+
                           //  widget.callback(widget.curState, "wish"),
                         },
                       ),
@@ -295,18 +372,23 @@ class NoticeExperience extends StatelessWidget {
                     width: 130.0,
                     child: SizedBox(
                       child: RaisedButton(
-                        color: Colors.white,
+                        color: widget.map["irritability"]==true?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        // background: Colors.pink[300],
                         child: Text(
                           'irritability',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () => {
+                        onPressed: ()  {
+                          bool res = widget.map["irritability"];
+                          widget.map["irritability"]=!res;
+                          widget.noneOfThemAbove=-1;
+                          setState(() {
+
+                          });
+
                           //  widget.callback(widget.curState, "wish"),
-                        },
-                      ),
+                        },                      ),
                     ),
                   ),
 
@@ -314,16 +396,21 @@ class NoticeExperience extends StatelessWidget {
                     height: 40.0,
                     width: 130.0,
                     child: SizedBox(
-                      child: RaisedButton(
-                        color: Colors.white,
+                      child: RaisedButton( color: widget.map["excitement"]==true?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        // background: Colors.pink[300],
                         child: Text(
                           'excitement',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () => {
+                        onPressed: ()  {
+                          bool res = widget.map["excitement"];
+                          widget.map["excitement"]=!res;
+                          widget.noneOfThemAbove=-1;
+                          setState(() {
+
+                          });
+
                           //  widget.callback(widget.curState, "wish"),
                         },
                       ),
@@ -341,19 +428,23 @@ class NoticeExperience extends StatelessWidget {
                     height: 50.0,
                     width: 230.0,
                     child: FittedBox(
-                      child: RaisedButton(
-                        color: Colors.white,
+                      child: RaisedButton( color: widget.map["other_physical_sensation"]==true?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        // background: Colors.pink[300],
                         child: Text(
                           'other physical sensation',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () => {
+                        onPressed: ()  {
+                          bool res = widget.map["other_physical_sensation"];
+                          widget.map["other_physical_sensation"]=!res;
+                          widget.noneOfThemAbove=-1;
+                          setState(() {
+
+                          });
+
                           //  widget.callback(widget.curState, "wish"),
-                        },
-                      ),
+                        },),
                     ),
                   ),
 
@@ -368,16 +459,31 @@ class NoticeExperience extends StatelessWidget {
                     height: 50.0,
                     width: 230.0,
                     child: FittedBox(
-                      child: RaisedButton(
-                        color: Colors.white,
+                      child: RaisedButton( color: widget.noneOfThemAbove==1?Colors.deepOrangeAccent[100]: Colors.white,
                         shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        // background: Colors.pink[300],
                         child: Text(
-                          'none of the above',
+                          'none of them above',
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () => {
+                        onPressed: ()  {
+                        widget.noneOfThemAbove=1;
+                                widget.map["tension"] = false;
+                                widget.map["calmness"] = false;
+                                widget.map["shakiness"] = false;
+                                widget.map["stillness"] = false;
+                                widget.map["pain"] = false;
+                                widget.map["joy"] = false;
+                                widget.map["cig_craving"] = false;
+                                widget.map["contentment"] = false;
+                                widget.map["restlessness"] = false;
+                                widget.map["fluttering"] = false;
+                                widget.map["irritability"] = false;
+                                widget.map["excitement"] = false;
+                                widget.map["other_physical_sensation"] = false;
+                          setState(() {
+
+                          });
                           //  widget.callback(widget.curState, "wish"),
                         },
                       ),
@@ -396,7 +502,7 @@ class NoticeExperience extends StatelessWidget {
             Expanded(child:IconButton(alignment: Alignment.bottomLeft,
               icon: Icon(Icons.keyboard_arrow_left, color: Colors.grey,size: 50,),
               onPressed: (){
-                callback(curState, "back");
+                widget.callback(widget.curState, "back");
               },
             ),
             ),
@@ -410,7 +516,7 @@ class NoticeExperience extends StatelessWidget {
             Expanded(child: IconButton(alignment: Alignment.bottomRight,
               icon: Icon(Icons.keyboard_arrow_right, color: Colors.grey,size: 50,),
               onPressed: (){
-                callback(curState, "next");
+                widget.callback(widget.curState, "next");
               },
             ),
             ),
@@ -423,3 +529,6 @@ class NoticeExperience extends StatelessWidget {
     );
   }
 }
+
+
+

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class ImagineLike extends StatefulWidget {
+class NoticeLike extends StatefulWidget {
   final String curState;
   final void Function(String, String) callback;
 
-  ImagineLike(this.curState, this.callback);
+  NoticeLike(this.curState, this.callback);
 
   @override
-  _ImagineLikeState createState() => _ImagineLikeState();
+  _NoticeLikeState createState() => _NoticeLikeState();
 }
 
-class _ImagineLikeState extends State<ImagineLike> {
+class _NoticeLikeState extends State<NoticeLike> {
   bool isSelectedUp = false;
   bool isSelectedDown = false;
   @override
@@ -36,7 +36,7 @@ class _ImagineLikeState extends State<ImagineLike> {
             Container(child: Column(children: <Widget>[
               SizedBox(height: 200),
               Image.asset(
-                'assets/imagine_logo.png',
+                'assets/notice_white.png',
                 width: 70,
                 height: 70,
               ),
