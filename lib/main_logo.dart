@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:mars/widget_abstract.dart';
 
-class MainLogo extends StatefulWidget {
-  final String currentState;
-  final void Function(String, String) callback;
+class MainLogo extends WidgetAbstract {
 
-  MainLogo(this.currentState, this.callback);
+  MainLogo(currentState, callback):super(currentState, callback, null);
   @override
   _MainLogoState createState() => _MainLogoState();
+
+  @override
+  Widget myWidget(BuildContext context, refresh) {
+    return Container();
+  }
 }
 
 
@@ -14,19 +18,18 @@ class _MainLogoState extends State<MainLogo> {
   @override
   void initState(){
     super.initState();
-    Future.delayed(Duration(seconds: 2),()=>widget.callback(widget.currentState, "next"));
+    Future.delayed(Duration(seconds: 2),()=>widget.callback(widget.curState, "next",null));
   }
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset("assets/mars.png"),
-
-
-          ],
+        child: new Image.asset(
+          "assets/mars_load.png",
+          width: size.width,
+          height: size.height,
+          fit: BoxFit.cover,
         ),
       ),
     );

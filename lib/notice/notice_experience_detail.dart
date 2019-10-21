@@ -1,106 +1,40 @@
 import 'package:flutter/material.dart';
 
-class NoticeExperienceDetail extends StatelessWidget {
-  final String curState;
-  final void Function(String, String) callback;
+import 'notice_abstract.dart';
 
-  NoticeExperienceDetail(this.curState, this.callback);
+class NoticeExperienceDetail extends NoticeAbstract {
+
+  NoticeExperienceDetail(String curState,
+      void Function(String, String, String) callback)
+      : super(curState, callback, 'assets/notice_1.png');
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _myListView(context),
-      backgroundColor: Colors.white,
-
-    );
-  }
-
-// replace this function with the code in the examples
-  Widget _myListView(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+  Widget myWidget(BuildContext context, Function() refresh) {
     return Column(
-      children: <Widget>[
-        Expanded(child:
-        Column(
-
-            children:<Widget>[
-              Padding(
-                padding: EdgeInsets.all(25),
-              ),
-        Image.asset(
-          'assets/notice_white.png',
-          width: 70,
-          height: 70,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+      Padding(
+        padding: EdgeInsets.only(top: 80),
+      ),
+      Text(
+        'Take a couple of\nminutes and focus on\nyour sensation of',
+        textAlign: TextAlign.center,
+      ),
+      Container(
+        padding: EdgeInsets.only(top:10),
+        child: Text(
+          data,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Color(0xfffbb299), fontSize: 22),
         ),
-              Padding(
-                padding: EdgeInsets.all(15),
-              ),
-
-              Container(
-                padding: EdgeInsets.all(0),
-                   child: Text(
-
-                  'Take a couple of \nminutes and \nfocus on \nyour',
-                     textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black87, letterSpacing: 1, wordSpacing: 10),
-                            ),
+      ),
+      Container(
+        padding: EdgeInsets.only(top:10),
+        child: Text(
+          'Remember this is just a sensation,\neven though your mind may\nlabel them as "good" or "bad."\nYou can simply allow physical\nsensations to be present.\n\nTry noticing sensations in your\nbody without judging or labeling them',
+          textAlign: TextAlign.center,
         ),
-              Container(
-                padding: EdgeInsets.all(30),
-                child: Text(
-
-                  'restlessness',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
-
-              Container(
-                padding: EdgeInsets.all(25),
-                child: Text(
-
-                  'Remember these are just sensations, even though your mind may label them as "good" or "bad"; you can simply allow them to be present, notice and acccept them for what they are, wothout judgement ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(10),
-              ),
-
-
-
-            ])),
-
-        Row(
-          children: <Widget>[
-            Expanded(child:IconButton(alignment: Alignment.bottomLeft,
-              icon: Icon(Icons.keyboard_arrow_left, color: Colors.grey,size: 50,),
-              onPressed: (){
-                callback(curState, "back");
-              },
-            ),
-            ),
-            Expanded(child:IconButton(alignment: Alignment.center,
-              icon: Icon(Icons.volume_up, color: Colors.grey,size: 50,),
-              onPressed: (){
-
-              },
-            ),
-            ),
-            Expanded(child: IconButton(alignment: Alignment.bottomRight,
-              icon: Icon(Icons.keyboard_arrow_right, color: Colors.grey,size: 50,),
-              onPressed: (){
-                callback(curState, "next");
-              },
-            ),
-            ),
-          ],),
-        Padding(
-          padding: EdgeInsets.all(10),
-        ),
-
-      ],
-    );
+      ),
+    ]);
   }
 }

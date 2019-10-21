@@ -19,6 +19,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  font_awesome_flutter: ^8.5.0
+  flutter_colorpicker: ^0.2.6
+  pie_chart: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -41,13 +44,36 @@ flutter:
     - assets/moodsurf.jpg
     - assets/meditate.png
     - assets/mars.png
+    - assets/mars_load.png
+    - assets/moodsurf_logo.png
     - assets/imagine.png
+    - assets/imagine_1.png
+    - assets/imagine_2.png
+    - assets/imagine_3.png
+    - assets/imagine_4.png
+    - assets/imagine_5.png
     - assets/notice.png
+    - assets/notice_1.png
     - assets/joy.png
-    - assets/moodsurf_1.jpg
+    - assets/moodsurf_1.png
+    - assets/moodsurf_2.png
     - assets/moodsurf_3.png
-    - assets/imagine_logo.png
-    - assets/notice_white.png
+    - assets/moodsurf_4.png
+    - assets/moodsurf_5.png
+    - assets/moodsurf_6.png
+    - assets/moodsurf_7.png
+    - assets/meditate_1.png
+    - assets/meditate_2.png
+    - assets/moodsurf_load_screen.png
+    - assets/meditate_load_screen.png
+    - assets/notice_load_screen.png
+    - assets/joy_load_screen.png
+    - assets/imagine_load_screen.png
+    - assets/joy_0.png
+    - assets/joy_1.png
+
+#    - assets/imagine_logo.png
+#    - assets/notice_white.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
 

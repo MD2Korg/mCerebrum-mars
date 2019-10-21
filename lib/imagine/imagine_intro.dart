@@ -1,115 +1,54 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ImagineIntro extends StatelessWidget {
-  final String curState;
-  final void Function(String, String) callback;
+import 'imagine_abstract.dart';
 
-  ImagineIntro(this.curState, this.callback);
+class ImagineIntro extends ImagineAbstract {
+  ImagineIntro(String curState, void Function(String, String, String) callback)
+      : super(curState, callback, 'assets/imagine_1.png', hasBack:false, hasForward:false);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _myListView(context),
-      backgroundColor: Colors.white,
-
-    );
-  }
-
-// replace this function with the code in the examples
-  Widget _myListView(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+  Widget myWidget(BuildContext context, Function() refresh) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Expanded(child:
-        Column(
-
-            children:<Widget>[
-              Padding(
-                padding: EdgeInsets.all(25),
-              ),
-        Image.asset(
-          'assets/imagine_logo.png',
-          width: 70,
-          height: 70,
-        ),
-              Padding(
-                padding: EdgeInsets.all(30),
-              ),
-        Text(
-          'Imagine',
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.black),
-        ),
-              Padding(
-                padding: EdgeInsets.all(0),
-              ),
-
+          Padding(
+            padding: EdgeInsets.all(60),
+          ),
+          Text(
+            'Imagine',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.black, fontSize: 24),
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 30),
+            child: Text(
+              'People use their imagination\nin many ways to cope.\n\nThis is an exercise using your\nimagination to explore your\nthoughts and feelings.',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black87),
+            ),
+          ),
+              Padding(padding: EdgeInsets.only(top:80),),
               Container(
-                padding: EdgeInsets.all(30),
-                   child: Text(
-
-                  'People use their imagination in many ways to cope. This is an exercise to use your imagination to explore your thoughts and emotions.',
-                     textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black87),
-                            ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(30),
-        ),
-              Container(
-                height: 70.0,
-                width: 70.0,
+                height: 90.0,
+                width: 90.0,
                 child: FittedBox(
                   child: FloatingActionButton(
-                    backgroundColor: Colors.deepOrangeAccent[100],
+                    backgroundColor: Color(0xffff7d7d),
+                    splashColor: Color(0xffffb2b2),
+                    shape: RoundedRectangleBorder(side: BorderSide(),borderRadius: BorderRadius.circular(50)),
                     child: Text(
-                      'begin',
+                      'Begin',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.black),
                     ),
-                    onPressed: () => {
-                      callback(curState, "begin"),
+                    onPressed: () {
+                      callback(curState, "begin",null);
                     },
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.all(15),
-              ),
 
-
-
-            ])),
-
-        Row(
-          children: <Widget>[
-            Expanded(child:IconButton(alignment: Alignment.bottomLeft,
-              icon: Icon(Icons.keyboard_arrow_left, color: Colors.grey,size: 50,),
-              onPressed: (){
-                callback(curState, "back");
-              },
-            ),
-            ),
-            Expanded(child:IconButton(alignment: Alignment.center,
-              icon: Icon(Icons.volume_up, color: Colors.grey,size: 50,),
-              onPressed: (){
-
-              },
-            ),
-            ),
-            Expanded(child: IconButton(alignment: Alignment.bottomRight,
-              icon: Icon(Icons.keyboard_arrow_right, color: Colors.grey,size: 50,),
-              onPressed: (){
-                callback(curState, "next");
-              },
-            ),
-            ),
-          ],),
-        Padding(
-          padding: EdgeInsets.all(10),
-        ),
-
-      ],
-    );
+          ]);
   }
 }

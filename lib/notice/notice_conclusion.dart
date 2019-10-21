@@ -1,88 +1,22 @@
 import 'package:flutter/material.dart';
 
-class NoticeConclusion extends StatelessWidget {
-  final String curState;
-  final void Function(String, String) callback;
+import 'notice_abstract.dart';
 
-  NoticeConclusion(this.curState, this.callback);
+class NoticeConclusion extends NoticeAbstract {
+  NoticeConclusion(String curState, void Function(String, String, String) callback)
+      : super(curState, callback, 'assets/notice_1.png');
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _myListView(context),
-      backgroundColor: Colors.white,
-
-    );
-  }
-
-// replace this function with the code in the examples
-  Widget _myListView(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Column(
-      children: <Widget>[
-        Expanded(child:
-        Column(
-
-            children:<Widget>[
-              Padding(
-                padding: EdgeInsets.all(25),
-              ),
-        Image.asset(
-          'assets/notice_white.png',
-          width: 70,
-          height: 70,
-        ),
-              Padding(
-                padding: EdgeInsets.all(15),
-              ),
-
-
-              Container(
-                padding: EdgeInsets.all(30),
-                child: Text(
-
-                  'Physican sensations are an important part of how we experience our thoughts and emotions; acceptance of those sensations can help us deal with thoughts and emotion in a healthy way. ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(10),
-              ),
-
-
-
-            ])),
-
-        Row(
-          children: <Widget>[
-            Expanded(child:IconButton(alignment: Alignment.bottomLeft,
-              icon: Icon(Icons.keyboard_arrow_left, color: Colors.grey,size: 50,),
-              onPressed: (){
-                callback(curState, "back");
-              },
-            ),
-            ),
-            Expanded(child:IconButton(alignment: Alignment.center,
-              icon: Icon(Icons.volume_up, color: Colors.grey,size: 50,),
-              onPressed: (){
-
-              },
-            ),
-            ),
-            Expanded(child: IconButton(alignment: Alignment.bottomRight,
-              icon: Icon(Icons.keyboard_arrow_right, color: Colors.grey,size: 50,),
-              onPressed: (){
-                callback(curState, "next");
-              },
-            ),
-            ),
-          ],),
-        Padding(
-          padding: EdgeInsets.all(10),
-        ),
-
-      ],
-    );
+  Widget myWidget(BuildContext context, Function() refresh) {
+    return Column(children: <Widget>[
+      Padding(
+        padding: EdgeInsets.all(60),
+      ),
+      Text(
+        'Noticing how sensations make\nus feel and affect the body\ncan help us realize the power\nthey have in our daily lives.\n\nWhen we practice noticing\nthese sensations without\njudgement, it can help us\nbetter understand ourselves\nand accept that these\nsensations sometimes happen.',
+        textAlign: TextAlign.center,
+        style: TextStyle(color: Colors.black),
+      ),
+    ]);
   }
 }

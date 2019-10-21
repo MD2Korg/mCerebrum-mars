@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 
-class Menu extends StatelessWidget {
-  final String curState;
-  final void Function(String, String) callback;
+import 'widget_abstract.dart';
 
-  Menu(this.curState, this.callback);
+class Menu extends WidgetAbstract {
+
+  Menu(curState, callback) :super(curState, callback, null);
+
+  @override
+  _JoyAbstractState createState() => _JoyAbstractState();
+
+  @override
+  Widget myWidget(BuildContext context, refresh) {
+    return Container();
+  }
+}
+class _JoyAbstractState extends State<Menu> {
+  void refresh() {
+    setState(() {
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,145 +29,146 @@ class Menu extends StatelessWidget {
 
 // replace this function with the code in the examples
   Widget _myListView(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        Padding(padding:EdgeInsets.only(top:20)),
         Image.asset(
           'assets/mars.png',
           width: 100,
           height: 100,
         ),
-        Padding(
-          padding: EdgeInsets.all(20),
-        ),
-        GestureDetector(
-            onTap: () {
-              callback(curState, "moodsurf");
-            },
-            child: Container(
-              padding: EdgeInsets.only(left: 50, right: 50),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'moodsurf',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.blueAccent),
+        Expanded(child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                widget.callback(widget.curState, "moodsurf",null);
+              },
+              child: Container(
+                padding: EdgeInsets.only( left: 100, right: 30),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'moodsurf',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.blueAccent, fontSize: 20),
+                      ),
                     ),
-                  ),
-                  Image.asset(
-                    'assets/moodsurf.jpg',
-                    width: 50,
-                    height: 50,
-                  ),
-                ],
-              ),
-            )),
-        Padding(
-          padding: EdgeInsets.all(15),
-        ),
-        GestureDetector(
-            onTap: () {
-              callback(curState, "meditate");
-            },
-            child: Container(
-              padding: EdgeInsets.only(left: 50, right: 50),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'meditate',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.purpleAccent),
+                    Image.asset(
+                      'assets/moodsurf_logo.png',
+                      width: 70,
+                      height: 70,
                     ),
-                  ),
-                  Image.asset(
-                    'assets/meditate.png',
-                    width: 50,
-                    height: 50,
-                  ),
-                ],
-              ),
-            )),
-        Padding(
-          padding: EdgeInsets.all(15),
-        ),
-        GestureDetector(
-            onTap: () {
-              callback(curState, "imagine");
-            },
-            child: Container(
-              padding: EdgeInsets.only(left: 50, right: 50),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'imagine',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.redAccent),
+                  ],
+                ),
+              )),
+          Padding(
+            padding: EdgeInsets.all(5),
+          ),
+          GestureDetector(
+              onTap: () {
+                widget.callback(widget.curState, "meditate",null);
+              },
+              child: Container(
+                padding: EdgeInsets.only(left: 100, right: 30),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'meditate',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.purpleAccent, fontSize: 20),
+                      ),
                     ),
-                  ),
-                  Image.asset(
-                    'assets/imagine.png',
-                    width: 50,
-                    height: 50,
-                  ),
-                ],
-              ),
-            )),
-        Padding(
-          padding: EdgeInsets.all(15),
-        ),
-        GestureDetector(
-            onTap: () {
-              callback(curState, "notice");
-            },
-            child: Container(
-              padding: EdgeInsets.only(left: 50, right: 50),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'notice',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.amberAccent),
+                    Image.asset(
+                      'assets/meditate.png',
+                      width: 70,
+                      height: 70,
                     ),
-                  ),
-                  Image.asset(
-                    'assets/notice.png',
-                    width: 50,
-                    height: 50,
-                  ),
-                ],
-              ),
-            )),
-        Padding(
-          padding: EdgeInsets.all(15),
-        ),
-        GestureDetector(
-            onTap: () {
-              callback(curState, "joy");
-            },
-            child: Container(
-              padding: EdgeInsets.only(left: 50, right: 50),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'joy',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.green),
+                  ],
+                ),
+              )),
+          Padding(
+            padding: EdgeInsets.all(5),
+          ),
+          GestureDetector(
+              onTap: () {
+                widget.callback(widget.curState, "imagine",null);
+              },
+              child: Container(
+                padding: EdgeInsets.only(left: 100, right: 30),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'imagine',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.redAccent, fontSize: 20),
+                      ),
                     ),
-                  ),
-                  Image.asset(
-                    'assets/joy.png',
-                    width: 50,
-                    height: 50,
-                  ),
-                ],
-              ),
-            )),
+                    Image.asset(
+                      'assets/imagine.png',
+                      width: 70,
+                      height: 70,
+                    ),
+                  ],
+                ),
+              )),
+          Padding(
+            padding: EdgeInsets.all(5),
+          ),
+          GestureDetector(
+              onTap: () {
+                widget.callback(widget.curState, "notice",null);
+              },
+              child: Container(
+                padding: EdgeInsets.only(left: 100, right: 30),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'notice',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.amberAccent, fontSize: 20),
+                      ),
+                    ),
+                    Image.asset(
+                      'assets/notice.png',
+                      width: 70,
+                      height: 70,
+                    ),
+                  ],
+                ),
+              )),
+          Padding(
+            padding: EdgeInsets.all(5),
+          ),
+          GestureDetector(
+              onTap: () {
+                widget.callback(widget.curState, "joy",null);
+              },
+              child: Container(
+                padding: EdgeInsets.only(left: 100, right: 30),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'joy',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.green, fontSize: 20),
+                      ),
+                    ),
+                    Image.asset(
+                      'assets/joy.png',
+                      width: 70,
+                      height: 70,
+                    ),
+                  ],
+                ),
+              )),
+
+        ],),),
       ],
     );
   }

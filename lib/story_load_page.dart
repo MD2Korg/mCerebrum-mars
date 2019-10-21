@@ -1,60 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:mars/widget_abstract.dart';
 
-class StoryLoadPage extends StatefulWidget {
-  final String currentState;
-  final void Function(String, String) callback;
+class StoryLoadPage extends WidgetAbstract {
+  StoryLoadPage(currentState, callback) : super(currentState, callback, null);
 
-  StoryLoadPage(this.currentState, this.callback);
   @override
   _StoryLoadPageState createState() => _StoryLoadPageState();
-}
 
+  @override
+  Widget myWidget(BuildContext context, refresh) {
+    return Container();
+  }
+}
 
 class _StoryLoadPageState extends State<StoryLoadPage> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 1),()=>widget.callback(widget.currentState, "next"));
+    Future.delayed(Duration(seconds: 2),
+        () => widget.callback(widget.curState, "next", null));
   }
+
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(_getImagePath()),
-            Container(padding: EdgeInsets.all(20),),
-            Text(
-              _getText(),
-                style: TextStyle(color: Colors.white),
-            ),
-          ],
+        child: new Image.asset(
+          _getImagePath(),
+          width: size.width,
+          height: size.height,
+          fit: BoxFit.cover,
         ),
       ),
     );
   }
-  String _getImagePath(){
+
+  String _getImagePath() {
     String path = "assets/moodsurf.png";
-    switch(widget.currentState){
-      case "moodsurf_load": path = "assets/moodsurf.jpg";break;
-      case "meditate_load": path = "assets/meditate.png";break;
-      case "imagine_load": path = "assets/imagine.png";break;
-      case "notice_load": path = "assets/notice.png";break;
-      case "joy_load": path = "assets/joy.png";break;
+    switch (widget.curState) {
+      case "moodsurf_load":
+        path = "assets/moodsurf_load_screen.png";
+        break;
+      case "meditate_load":
+        path = "assets/meditate_load_screen.png";
+        break;
+      case "imagine_load":
+        path = "assets/imagine_load_screen.png";
+        break;
+      case "notice_load":
+        path = "assets/notice_load_screen.png";
+        break;
+      case "joy_load":
+        path = "assets/joy_load_screen.png";
+        break;
     }
     return path;
-  }
-  String _getText(){
-    String text = "moodsurf";
-    switch(widget.currentState){
-      case "moodsurf_load": text = "moodsurf";break;
-      case "meditate_load": text = "meditate";break;
-      case "imagine_load": text = "imagine";break;
-      case "notice_load": text = "notice";break;
-      case "joy_load": text = "joy";break;
-    }
-    return text;
-
   }
 }

@@ -1,115 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:mars/notice/notice_abstract.dart';
 
-class NoticeBegin extends StatelessWidget {
-  final String curState;
-  final void Function(String, String) callback;
-
-  NoticeBegin(this.curState, this.callback);
+class NoticeBegin extends NoticeAbstract {
+  NoticeBegin(String curState, void Function(String, String, String) callback)
+      : super(curState, callback, 'assets/notice_1.png', hasBack:false, hasForward:false);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _myListView(context),
-      backgroundColor: Colors.white,
-
-    );
-  }
-
-// replace this function with the code in the examples
-  Widget _myListView(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Column(
-      children: <Widget>[
-        Expanded(child:
-        Column(
-
-            children:<Widget>[
-              Padding(
-                padding: EdgeInsets.all(25),
-              ),
-        Image.asset(
-          'assets/notice_white.png',
-          width: 70,
-          height: 70,
-        ),
-              Padding(
-                padding: EdgeInsets.all(15),
-              ),
-        Text(
-          'notice',
+  Widget myWidget(BuildContext context, Function() refresh) {
+    return Column(children: <Widget>[
+      Padding(padding:EdgeInsets.only(top:100)),
+      Text(
+        'notice',
+        textAlign: TextAlign.center,
+        style: TextStyle(color: Colors.black, fontSize: 24),
+      ),
+      Container(
+        padding: EdgeInsets.all(20),
+        child: Text(
+          'Sometimes we experience\nthoughts or feelings as\nuncomfortable physical\nsensations. Accepting that\nthese sensations sometimes\noccur is one way to deal with\nthese experiences.',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
-              Padding(
-                padding: EdgeInsets.all(0),
-              ),
+      ),
+      Padding(
+        padding: EdgeInsets.all(10),
+      ),
+      Container(
+        height: 90.0,
+        width: 90.0,
+        child: FittedBox(
+          child: FloatingActionButton(
+            backgroundColor: Color(0xfff9926f),
+            splashColor: Color(0xfffccbbc),
+            shape: RoundedRectangleBorder(side: BorderSide(),borderRadius: BorderRadius.circular(50)),
 
-              Container(
-                padding: EdgeInsets.all(30),
-                   child: Text(
-
-                  'Sometimes we experience thoughts or emotions as uncomfortable physical sensations. Accepting that these sensations sometimes occur is one way to deal with these experiences.',
-                     textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black87),
-                            ),
+            child: Text(
+              'Begin',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold),
+            ),
+            onPressed: () {
+              callback(curState, "begin",null);
+            },
+          ),
         ),
-        Padding(
-          padding: EdgeInsets.all(30),
-        ),
-              Container(
-                height: 70.0,
-                width: 70.0,
-                child: FittedBox(
-                  child: FloatingActionButton(
-                    backgroundColor: Colors.deepOrangeAccent[100],
-                    child: Text(
-                      'begin',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    onPressed: () => {
-                      callback(curState, "begin"),
-                    },
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(15),
-              ),
-
-
-
-            ])),
-
-        Row(
-          children: <Widget>[
-            Expanded(child:IconButton(alignment: Alignment.bottomLeft,
-              icon: Icon(Icons.keyboard_arrow_left, color: Colors.grey,size: 50,),
-              onPressed: (){
-                callback(curState, "back");
-              },
-            ),
-            ),
-            Expanded(child:IconButton(alignment: Alignment.center,
-              icon: Icon(Icons.volume_up, color: Colors.grey,size: 50,),
-              onPressed: (){
-
-              },
-            ),
-            ),
-            Expanded(child: IconButton(alignment: Alignment.bottomRight,
-              icon: Icon(Icons.keyboard_arrow_right, color: Colors.grey,size: 50,),
-              onPressed: (){
-                callback(curState, "next");
-              },
-            ),
-            ),
-          ],),
-        Padding(
-          padding: EdgeInsets.all(10),
-        ),
-
-      ],
-    );
+      ),
+      Padding(
+        padding: EdgeInsets.all(15),
+      ),
+    ]);
   }
 }

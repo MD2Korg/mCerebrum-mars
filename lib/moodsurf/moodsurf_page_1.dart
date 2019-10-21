@@ -1,83 +1,62 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MoodSurfPage1 extends StatefulWidget {
-  final String curState;
-  final void Function(String, String) callback;
+import 'moodsurf_abstract.dart';
 
-  MoodSurfPage1(this.curState, this.callback);
-
-  @override
-  _MoodSurfPage1State createState() => _MoodSurfPage1State();
-}
-
-class _MoodSurfPage1State extends State<MoodSurfPage1> {
+class MoodSurfPage1 extends MoodSurfAbstract {
+  MoodSurfPage1(String curState, void Function(String, String, String) callback)
+      : super(curState, callback, 'assets/moodsurf_2.png');
 
   @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return new WillPopScope(
-      onWillPop: (){
-        widget.callback(widget.curState, "back");
-        return new Future(() => false);
-      } ,
-      child:
-
-      Scaffold(
-      body: Stack(
+  Widget myWidget(BuildContext context, Function() refresh) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Center(
-            child: new Image.asset(
-              'assets/moodsurf_1.jpg',
-              width: size.width,
-              height: size.height,
-
-              fit: BoxFit.cover,
-            ),
+          Padding(padding: EdgeInsets.only(top: 120)),
+          Container(
+            padding: EdgeInsets.only(left: 20),
+            child: Text("Imagine\nyourself riding\na wave.",
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.black)),
           ),
-            Container(child: Column(children: <Widget>[
-    SizedBox(height: 100),
-    Expanded(child:
-    Container(
-      padding: EdgeInsets.all(50),
-      width: double.infinity,
-      child:
-    Text("Begin by relaxing and focusing on your thoughts and feelings right now. Do not judge them; just acknowledge that they are there.",
-    textAlign: TextAlign.center,
-    style: TextStyle(
-    color: Colors.black)),
-    ),
-    ),
-              Row(
-                children: <Widget>[
-                  Expanded(child:IconButton(alignment: Alignment.bottomLeft,
-                    icon: Icon(Icons.keyboard_arrow_left, color: Colors.white,size: 50,),
-                    onPressed: (){
-                    widget.callback(widget.curState, "back");
-                    },
-                  ),
-                  ),
-                  Expanded(child:IconButton(alignment: Alignment.center,
-                    icon: Icon(Icons.volume_up, color: Colors.white,size: 50,),
-                    onPressed: (){
-
-                    },
-                  ),
-                  ),
-                  Expanded(child: IconButton(alignment: Alignment.bottomRight,
-                    icon: Icon(Icons.keyboard_arrow_right, color: Colors.white,size: 50,),
-                    onPressed: (){
-                      widget.callback(widget.curState, "next");
-                    },
-                  ),
-                  ),
-              ],),
-Container(padding: EdgeInsets.all(10),)
-
-            ],)
-            ),
-
+          Container(
+            padding: EdgeInsets.only(left: 20, top: 15),
+            child: Text("Simply be aware\nof the wave's\nmovement.",
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.black)),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 20, top: 15),
+            child: Text("Rising",
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.black)),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 20, top: 15),
+            child: Text("Rising",
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.black)),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 20, top: 15),
+//                      width: double.infinity,
+//                      width: MediaQuery.of(context).size.width / 2,
+            child: Text("Rushing",
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.grey[700])),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 20, top: 15),
+//                      width: double.infinity,
+//                      width: MediaQuery.of(context).size.width / 2,
+            child: Text("away",
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.grey[500])),
+          ),
         ],
-      ),
       ),
     );
   }

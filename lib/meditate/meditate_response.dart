@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MeditateResponse extends StatefulWidget {
   final String curState;
-  final void Function(String, String) callback;
+  final void Function(String, String, String) callback;
 
   MeditateResponse(this.curState, this.callback);
 
@@ -18,7 +18,7 @@ class _MeditateResponseState extends State<MeditateResponse> {
     Size size = MediaQuery.of(context).size;
     return new WillPopScope(
         onWillPop: (){
-      widget.callback(widget.curState, "back");
+      widget.callback(widget.curState, "back",null);
       return new Future(() => false);
     } ,
     child:
@@ -93,7 +93,7 @@ class _MeditateResponseState extends State<MeditateResponse> {
                   Expanded(child:IconButton(alignment: Alignment.bottomLeft,
                     icon: Icon(Icons.keyboard_arrow_left, color: Colors.white,size: 50,),
                     onPressed: (){
-                      widget.callback(widget.curState, "back");
+                      widget.callback(widget.curState, "back",null);
                     },
                   ),
                   ),
@@ -107,7 +107,7 @@ class _MeditateResponseState extends State<MeditateResponse> {
                   Expanded(child: IconButton(alignment: Alignment.bottomRight,
                     icon: Icon(Icons.keyboard_arrow_right, color: Colors.white,size: 50,),
                     onPressed: (){
-                      widget.callback(widget.curState, "next");
+                      widget.callback(widget.curState, "next",null);
                     },
                   ),
                   ),

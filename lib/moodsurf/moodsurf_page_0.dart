@@ -1,83 +1,52 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class MoodSurfPage0 extends StatefulWidget {
-  final String curState;
-  final void Function(String, String) callback;
+import 'moodsurf_abstract.dart';
 
-  MoodSurfPage0(this.curState, this.callback);
-
-  @override
-  _MoodSurfPage0State createState() => _MoodSurfPage0State();
-}
-
-class _MoodSurfPage0State extends State<MoodSurfPage0> {
+class MoodSurfPage0 extends MoodSurfAbstract {
+  MoodSurfPage0(String curState, void Function(String, String,String) callback)
+      : super(curState, callback, 'assets/moodsurf_1.png', hasBack:false, hasForward:false);
 
   @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return new WillPopScope(
-        onWillPop: (){
-         widget.callback(widget.curState, "back");
-         return new Future(() => false);
-        } ,
-        child: Scaffold(
+  Widget myWidget(BuildContext context, Function() refresh) {
+    return Column(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(top:120),
+                  width: double.infinity,
+                  child: Text(
+                      "This exercise will help you\npractice managing stressful\nthoughts and emotions by\nimagining them as waves\nthat ebb and flow.\n\nLet’s try this now.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                      )),
+                ),
+                Expanded(child:
+                new Center(
+                  child: Container(
+                      width: 90.0,
+                      height: 90.0,
+                      child:FittedBox(
+                        child: FloatingActionButton(
+                          backgroundColor: Color(0xff7daaff),
+                          splashColor: Color(0xffCBDAF6),
+                          shape: RoundedRectangleBorder(side: BorderSide(),borderRadius: BorderRadius.circular(50)),
 
-      body: Stack(
-        children: <Widget>[
-          Center(
-            child: new Image.asset(
-              'assets/moodsurf_1.jpg',
-              width: size.width,
-              height: size.height,
-
-              fit: BoxFit.cover,
-            ),
-          ),
-            Container(child: Column(children: <Widget>[
-    SizedBox(height: 100),
-    Expanded(child:
-    Container(
-      padding: EdgeInsets.all(50),
-      width: double.infinity,
-      child:
-    Text("This activity will help you practice managing stressful emotions by thinking of them as waves that ebb and flow. Let’s try this now.",
-    textAlign: TextAlign.center,
-    style: TextStyle(
-    color: Colors.black)),
-    ),
-    ),
-              Row(
-                children: <Widget>[
-                  Expanded(child:IconButton(alignment: Alignment.bottomLeft,
-                    icon: Icon(Icons.keyboard_arrow_left, color: Colors.white,size: 50,),
-                    onPressed: (){
-                    widget.callback(widget.curState, "back");
-                    },
+                          child: Text(
+                            'Begin',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          onPressed: ()  {
+                            callback(curState, "next",null);
+                          },
+                        ),
+                      ),
                   ),
-                  ),
-                  Expanded(child:IconButton(alignment: Alignment.center,
-                    icon: Icon(Icons.volume_up, color: Colors.white,size: 50,),
-                    onPressed: (){
-
-                    },
-                  ),
-                  ),
-                  Expanded(child: IconButton(alignment: Alignment.bottomRight,
-                    icon: Icon(Icons.keyboard_arrow_right, color: Colors.white,size: 50,),
-                    onPressed: (){
-                      widget.callback(widget.curState, "next");
-                    },
-                  ),
-                  ),
-              ],),
-Container(padding: EdgeInsets.all(10),)
-
-            ],)
-            ),
-
-        ],
-      ),
-        ),
+                ),
+                ),
+              ],
     );
   }
 }

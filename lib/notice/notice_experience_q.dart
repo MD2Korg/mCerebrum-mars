@@ -1,246 +1,157 @@
 import 'package:flutter/material.dart';
 
+import 'notice_abstract.dart';
 
-class NoticeExperienceQ extends StatefulWidget {
-  final String curState;
-  final void Function(String, String) callback;
+class NoticeExperienceQ extends NoticeAbstract {
+  NoticeExperienceQ(
+      String curState, void Function(String, String, String) callback)
+      : super(curState, callback, 'assets/notice_1.png');
   final Map<String, bool> map = {
     'one': false,
-    'multiple':false,
+    'multiple': false,
     'changing': false,
     'same': false
   };
 
-
-  NoticeExperienceQ(this.curState, this.callback);
-
   @override
-  _NoticeExperienceQState createState() => _NoticeExperienceQState();
-}
-
-class _NoticeExperienceQState extends State<NoticeExperienceQ> {
-
-
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _myListView(context),
-      backgroundColor: Colors.white,
-
-    );
-  }
-
-// replace this function with the code in the examples
-  Widget _myListView(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+  Widget myWidget(BuildContext context, Function() refresh) {
     return Column(
-      children: <Widget>[
-        Expanded(child:
-        Column(
-
-            children:<Widget>[
-              Padding(
-                padding: EdgeInsets.all(25),
-              ),
-        Image.asset(
-          'assets/notice_white.png',
-          width: 70,
-          height: 70,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+      Text(
+        'Take a moment to answer the\nfollowing questions about your ',
+        textAlign: TextAlign.center,
+      ),
+      Container(
+        padding: EdgeInsets.only(top: 10),
+        child: Text(
+          data,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Color(0xfffbb299), fontSize: 22),
         ),
-              Padding(
-                padding: EdgeInsets.all(15),
-              ),
-
-              Container(
-                padding: EdgeInsets.all(0),
-                   child: Text(
-
-                  'Take a moment to answer the following questions about your ',
-                     textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black87, letterSpacing: 1, wordSpacing: 10),
-                            ),
+      ),
+      Container(
+        padding: EdgeInsets.only(top: 10),
+        child: Text(
+          'is it in one place or in\nmultiple places in your body?',
+          textAlign: TextAlign.center,
         ),
-              Container(
-                padding: EdgeInsets.all(10),
+      ),
+      Padding(
+        padding: EdgeInsets.all(20),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Container(
+            height: 40.0,
+            width: 130.0,
+            child: SizedBox(
+              child: RaisedButton(
+                color: map["one"] == true ? Color(0xfffbb299) : Colors.white,
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(8)),
                 child: Text(
-                  'restlessness',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
-
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-
-                  'is it in one place or multiple places in your body? ',
+                  'One',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.black),
                 ),
+                onPressed: () {
+                  bool res = map["one"];
+                  map["one"] = !res;
+                  map["multiple"] = false;
+                  refresh();
+                },
               ),
-              Padding(
-                padding: EdgeInsets.all(20),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Container(
-                    height: 40.0,
-                    width: 130.0,
-                    child: SizedBox(
-                      child: RaisedButton(
-                        color: widget.map["one"]==true?Colors.deepOrangeAccent[100]: Colors.white,
-                        shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        child: Text(
-                          'One',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: ()  {
-                          bool res = widget.map["one"];
-                          widget.map["one"]=!res;
-                          widget.map["multiple"]=false;
-                          setState(() {
-
-                          });
-
-
-                          //  widget.callback(widget.curState, "wish"),
-                        },
-                      ),
-                    ),
-                  ),
-
-                  Container(
-                    height: 40.0,
-                    width: 130.0,
-                    child: SizedBox(
-                      child:RaisedButton(
-                        color: widget.map["multiple"]==true?Colors.deepOrangeAccent[100]: Colors.white,
-                        shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        child: Text(
-                          'Multiple',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: ()  {
-                          bool res = widget.map["multiple"];
-                          widget.map["multiple"]=!res;
-                          widget.map["one"]=false;
-                          setState(() {
-
-                          });
-
-
-                          //  widget.callback(widget.curState, "wish"),
-                        },
-                      ),
-                    ),
-                  ),
-
-                ],),
-              Container(
-                padding: EdgeInsets.all(30),
+            ),
+          ),
+          Container(
+            height: 40.0,
+            width: 130.0,
+            child: SizedBox(
+              child: RaisedButton(
+                color:
+                    map["multiple"] == true ? Color(0xfffbb299) : Colors.white,
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(8)),
                 child: Text(
-
-                  'is it changing or does it always stay the same? ',
+                  'Multiple',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.black),
                 ),
+                onPressed: () {
+                  bool res = map["multiple"];
+                  map["multiple"] = !res;
+                  map["one"] = false;
+                  refresh();
+                },
               ),
-              Padding(
-                padding: EdgeInsets.all(10),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Container(
-                    height: 40.0,
-                    width: 130.0,
-                    child: SizedBox(
-                      child: RaisedButton(
-                        color: widget.map["changing"]==true?Colors.deepOrangeAccent[100]: Colors.white,
-                        shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        child: Text(
-                          'Changing',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: ()  {
-                          bool res = widget.map["changing"];
-                          widget.map["changing"]=!res;
-                          widget.map["same"]=false;
-                          setState(() {
-
-                          });
-
-
-                          //  widget.callback(widget.curState, "wish"),
-                        },
-                      ),
-                    ),
-                  ),
-
-                  Container(
-                    height: 40.0,
-                    width: 130.0,
-                    child: SizedBox(
-                      child:RaisedButton(
-                        color: widget.map["same"]==true?Colors.deepOrangeAccent[100]: Colors.white,
-                        shape: RoundedRectangleBorder (side: BorderSide (color: Colors.black) ),
-                        child: Text(
-                          'Same',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: ()  {
-                          bool res = widget.map["same"];
-                          widget.map["same"]=!res;
-                          widget.map["changing"]=false;
-                          setState(() {
-
-                          });
-
-
-                          //  widget.callback(widget.curState, "wish"),
-                        },
-                      ),
-                    ),
-                  ),
-
-                ],),
-
-
-            ])),
-
-        Row(
-          children: <Widget>[
-            Expanded(child:IconButton(alignment: Alignment.bottomLeft,
-              icon: Icon(Icons.keyboard_arrow_left, color: Colors.grey,size: 50,),
-              onPressed: (){
-                widget.callback(widget.curState, "back");
-              },
             ),
-            ),
-            Expanded(child:IconButton(alignment: Alignment.center,
-              icon: Icon(Icons.volume_up, color: Colors.grey,size: 50,),
-              onPressed: (){
-
-              },
-            ),
-            ),
-            Expanded(child: IconButton(alignment: Alignment.bottomRight,
-              icon: Icon(Icons.keyboard_arrow_right, color: Colors.grey,size: 50,),
-              onPressed: (){
-                widget.callback(widget.curState, "next");
-              },
-            ),
-            ),
-          ],),
-        Padding(
-          padding: EdgeInsets.all(10),
+          ),
+        ],
+      ),
+      Container(
+        padding: EdgeInsets.only(top: 30, bottom: 30),
+        child: Text(
+          'is it changing or does it\nalways stay the same? ',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.black),
         ),
-
-      ],
-    );
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Container(
+            height: 40.0,
+            width: 130.0,
+            child: SizedBox(
+              child: RaisedButton(
+                color:
+                    map["changing"] == true ? Color(0xfffbb299) : Colors.white,
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Text(
+                  'Changing',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  bool res = map["changing"];
+                  map["changing"] = !res;
+                  map["same"] = false;
+                  refresh();
+                },
+              ),
+            ),
+          ),
+          Container(
+            height: 40.0,
+            width: 130.0,
+            child: SizedBox(
+              child: RaisedButton(
+                color: map["same"] == true ? Color(0xfffbb299) : Colors.white,
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Text(
+                  'Same',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black),
+                ),
+                onPressed: () {
+                  bool res = map["same"];
+                  map["same"] = !res;
+                  map["changing"] = false;
+                  refresh();
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    ]);
   }
 }

@@ -1,228 +1,167 @@
 import 'package:flutter/material.dart';
 
-class MeditateMenu extends StatefulWidget {
-  final String curState;
-  final void Function(String, String) callback;
+import 'meditate_abstract.dart';
 
-  MeditateMenu(this.curState, this.callback);
+class MeditateMenu extends MeditateAbstract {
+  MeditateMenu(String curState, void Function(String, String, String) callback)
+      : super(curState, callback, 'assets/meditate_1.png',hasBack:false, hasForward:false);
 
   @override
-  _MeditateMenuState createState() => _MeditateMenuState();
-}
-
-class _MeditateMenuState extends State<MeditateMenu> {
-  @override
-  Widget build(BuildContext context) {
-    return new WillPopScope(
-        onWillPop: () async{
-          widget.callback(widget.curState, "back");
-          return false;
-        },
-        child: Scaffold(body:Container(
-            padding: EdgeInsets.all(30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image.asset(
-                  'assets/meditate.png',
-                  width: 100,
-                  height: 100,
+  Widget myWidget(BuildContext context, Function() refresh) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(top: 150),
+        ),
+        SizedBox(height: 400,width: 300,child:
+        Stack(children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(left:120),
+              height: 70.0,
+              width: 70.0,
+              child: FittedBox(
+                child: FloatingActionButton(
+                  backgroundColor: Color(0xff99eafa),
+                  child: Text(
+                    'peak',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  onPressed: () {
+                    data="peak";
+                    callback(curState, "next", "peak");
+                  },
                 ),
-                Text(
-                  'meditate',
-                  textAlign: TextAlign.right,
-//                  textScaleFactor: 1.5,
-                  style: TextStyle(color: Colors.white),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(35),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                  Text(
-                    'self',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Container(
-                    height: 70.0,
-                    width: 70.0,
-                    child: FittedBox(
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.grey,
-                        child: Text(
-                          'rock',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () => {
-                        widget.callback(widget.curState, "rock"),
-                        },
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 70.0,
-                    width: 70.0,
-                    child: FittedBox(
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.pink[300],
-                        child: Text(
-                          'wish',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () => {
-                        widget.callback(widget.curState, "wish"),
-                        },
-                      ),
-                    ),
-                  ),
-
-                ],),
-/*
-                ListTile(
-                  leading: Text(
-                    'self',
-                    textAlign: TextAlign.right,
-                    textScaleFactor: 1.5,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  title: Container(
-                    height: 80.0,
-                    width: 80.0,
-                    child: FittedBox(
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.grey,
-                        child: Text(
-                          'rock',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () => {},
-                      ),
-                    ),
-                  ),
-                  trailing: Container(
-                    height: 80.0,
-                    width: 80.0,
-                    child: FittedBox(
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.pink[300],
-                        child: Text(
-                          'wish',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () => {},
-                      ),
-                    ),
-                  ),
-                ),
-*/
-                Padding(
-                  padding: EdgeInsets.all(5),
-                ),
-                ListTile(
-                  leading: Text(
+              )),
+          Container(
+              margin: EdgeInsets.only(left:30, top:50),
+              height: 70.0,
+              width: 70.0,
+              child: FittedBox(
+                child: FloatingActionButton(
+                  backgroundColor: Color(0xffbc5bf0),
+                  child: Text(
                     'breath',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.black),
                   ),
-                  title: Container(
-                    height: 70.0,
-                    width: 70.0,
-                    child: FittedBox(
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.purple,
-                        child: Text(
-                          'space',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () {
-                          widget.callback(widget.curState, "space");
-                        },
-                      ),
-                    ),
+                  onPressed: () {
+                    data="breath";
+                    callback(curState, "next","breath");
+                  },
+                ),
+              )),
+          Container(
+              margin: EdgeInsets.only(left:210, top:50),
+              height: 70.0,
+              width: 70.0,
+              child: FittedBox(
+                child: FloatingActionButton(
+                  backgroundColor: Color(0xffff94d5),
+                  child: Text(
+                    'walk',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.black),
                   ),
+                  onPressed: () {
+                    data="walk";
+                    callback(curState, "next", "walk");
+                  },
                 ),
-                Padding(
-                  padding: EdgeInsets.all(5),
+              )),
+          Container(
+              margin: EdgeInsets.only(left:120,top:120),
+              height: 70.0,
+              width: 70.0,
+              child: FittedBox(
+                child: FloatingActionButton(
+                  backgroundColor: Color(0xffa2a2a2),
+                  child: Text(
+                    'intro',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  onPressed: () {
+                    data="intro";
+                    callback(curState, "next","intro");
+                  },
                 ),
-                ListTile(
-                  leading: Text(
+              )),
+          Container(
+              margin: EdgeInsets.only(left:20,top:150),
+              height: 70.0,
+              width: 70.0,
+              child: FittedBox(
+                child: FloatingActionButton(
+                  backgroundColor: Color(0xffc6ff7d),
+                  child: Text(
+                    'mind',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  onPressed: () {
+                    data="mind";
+                    callback(curState, "next","mind");
+                  },
+                ),
+              )),
+          Container(
+              margin: EdgeInsets.only(left:220,top:150),
+              height: 70.0,
+              width: 70.0,
+              child: FittedBox(
+                child: FloatingActionButton(
+                  backgroundColor: Color(0xffFF5959),
+                  child: Text(
+                    'aware',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  onPressed: () {
+                    data="aware";
+                    callback(curState, "next","aware");
+                  },
+                ),
+              )),
+          Container(
+              margin: EdgeInsets.only(left:70,top:240),
+              height: 70.0,
+              width: 70.0,
+              child: FittedBox(
+                child: FloatingActionButton(
+                  backgroundColor: Color(0xffD6AB88),
+                  child: Text(
                     'body',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.black),
                   ),
-                  title: Container(
-                    height: 70.0,
-                    width: 70.0,
-                    child: FittedBox(
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.lightGreenAccent,
-                        child: Text(
-                          'flow',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () => {
-                        widget.callback(widget.curState, "flow"),
-                        },
-                      ),
-                    ),
-                  ),
-                  trailing: Container(
-                    height: 70.0,
-                    width: 70.0,
-                    child: FittedBox(
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.orange,
-                        child: Text(
-                          'scan',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () => {
-                        widget.callback(widget.curState, "scan"),
-                        },
-                      ),
-                    ),
-                  ),
+                  onPressed: () {
+                    data="body";
+                    callback(curState, "next","body");
+                  },
                 ),
-                Padding(
-                  padding: EdgeInsets.all(5),
-                ),
-                ListTile(
-                  leading: Text(
-                    'urge',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(color: Colors.white),
+              )),
+          Container(
+              margin: EdgeInsets.only(left:170,top:240),
+              height: 70.0,
+              width: 70.0,
+              child: FittedBox(
+                child: FloatingActionButton(
+                  backgroundColor: Color(0xffFF9540),
+                  child: Text(
+                    'sound',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.black),
                   ),
-                  title: Container(
-                    height: 70.0,
-                    width: 70.0,
-                    child: FittedBox(
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.redAccent,
-                        child: Text(
-                          'wave',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () => {
-                        widget.callback(widget.curState, "wave"),
-                        },
-                      ),
-                    ),
-                  ),
+                  onPressed: () {
+                    data="sound";
+                    callback(curState, "next","sound");
+                  },
                 ),
-                Padding(
-                  padding: EdgeInsets.all(5),
-                ),
-              ],
-            ))));
+              )),
+        ])),
+      ],
+    );
   }
 }
