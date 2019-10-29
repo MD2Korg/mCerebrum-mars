@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:mars/joy/joy_abstract.dart';
 
 class Joy4Select extends JoyAbstract {
-  Joy4Select(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/joy_0.png', hasForward:false);
+  Joy4Select(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/joy_0.png', hasForward:false);
   String res="";
 
   @override
@@ -46,8 +46,13 @@ class Joy4Select extends JoyAbstract {
                     style: TextStyle(color: Colors.black),
                   ),
                   onPressed: () {
-                    if(res=="1") res="";
-                    else res="1";
+                    if(res=="1") {
+                      res="";
+                      callbackLog(curState, "1_min_button", "unselected");
+                    }
+                    else {res="1";
+                    callbackLog(curState, "1_min_button", "selected");
+                    }
                     refresh();
                   },
                 ),
@@ -69,8 +74,13 @@ class Joy4Select extends JoyAbstract {
                     style: TextStyle(color: Colors.black),
                   ),
                   onPressed: () {
-                    if(res=="2") res="";
-                    else res="2";
+                    if(res=="2") {
+                      res="";
+                      callbackLog(curState, "2_min_button", "unselected");
+                    }
+                    else {res="2";
+                    callbackLog(curState, "2_min_button", "selected");
+                    }
                     refresh();
                   },
                 ),
@@ -92,8 +102,13 @@ class Joy4Select extends JoyAbstract {
                     style: TextStyle(color: Colors.black),
                   ),
                   onPressed: () {
-                    if(res=="3") res="";
-                    else res="3";
+                    if(res=="3") {
+                      res="";
+                      callbackLog(curState, "3_min_button", "unselected");
+                    }
+                    else {res="3";
+                    callbackLog(curState, "3_min_button", "selected");
+                    }
                     refresh();
                   },
                 ),
@@ -119,6 +134,7 @@ class Joy4Select extends JoyAbstract {
                 style: TextStyle(color: Colors.black),
               ),
               onPressed: () {
+                callbackLog(curState, "begin", "pressed");
                 callback(curState,"next",res);
               },
             ),

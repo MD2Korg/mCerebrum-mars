@@ -4,11 +4,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mars/moodsurf/moodsurf_abstract.dart';
 
 class MoodSurfPage8 extends MoodSurfAbstract {
-  MoodSurfPage8(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/moodsurf_7.png');
+  MoodSurfPage8(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/moodsurf_7.png');
 
   bool isSelectedUp = false;
   bool isSelectedDown = false;
+  @override
+  Future<void> init() async{
+    isSelectedUp = false;
+    isSelectedDown = false;
+  }
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
@@ -31,7 +36,7 @@ class MoodSurfPage8 extends MoodSurfAbstract {
                   iconSize: 70,
                   onPressed: () {
                     isSelectedDown = !isSelectedDown;
-                    if (isSelectedDown == true)
+                    callbackLog(curState, "unlike_button", isSelectedDown?"selected":"unselected");
                       isSelectedUp = false;
                     refresh();
                   })
@@ -43,7 +48,7 @@ class MoodSurfPage8 extends MoodSurfAbstract {
                   iconSize: 70,
                   onPressed: () {
                     isSelectedDown = !isSelectedDown;
-                    if (isSelectedDown == true)
+                    callbackLog(curState, "unlike_button", isSelectedDown?"selected":"unselected");
                       isSelectedUp = false;
                     refresh();
                   })),
@@ -57,8 +62,8 @@ class MoodSurfPage8 extends MoodSurfAbstract {
               iconSize: 70,
               onPressed: () {
                 isSelectedUp = !isSelectedUp;
-                if (isSelectedUp == true)
                   isSelectedDown = false;
+                callbackLog(curState, "like_button", isSelectedUp?"selected":"unselected");
                 refresh();
               })
               : IconButton(
@@ -69,7 +74,7 @@ class MoodSurfPage8 extends MoodSurfAbstract {
               iconSize: 70,
               onPressed: () {
                 isSelectedUp = !isSelectedUp;
-                if (isSelectedUp == true)
+                callbackLog(curState, "like_button", isSelectedUp?"selected":"unselected");
                   isSelectedDown = false;
                 refresh();
               }),
@@ -79,141 +84,4 @@ class MoodSurfPage8 extends MoodSurfAbstract {
     ],
     );
   }
-  /*
-    Size size = MediaQuery.of(context).size;
-    return new WillPopScope(
-      onWillPop: () {
-        widget.callback(widget.curState, "back",null);
-        return new Future(() => false);
-      },
-      child: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            Center(
-              child: new Image.asset(
-                'assets/moodsurf_7.png',
-                width: size.width,
-                height: size.height,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-                child: Column(
-              children: <Widget>[
-                SizedBox(height: 200),
-                Expanded(
-                    child: Column(
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(45),
-                      width: double.infinity,
-                    ),
-                    Text("Was this exercise\nhelpful?",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.black)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                            padding: EdgeInsets.only(top: 40),
-                            child: isSelectedDown
-                                ? IconButton(
-                                    icon: Icon(FontAwesomeIcons.solidThumbsDown,
-                                        color: Colors.white, size: 50),
-                                    onPressed: () {
-                                      isSelectedDown = !isSelectedDown;
-                                      if (isSelectedDown == true)
-                                        isSelectedUp = false;
-                                      setState(() {});
-                                    })
-                                : IconButton(
-                                    icon: Icon(
-                                      FontAwesomeIcons.thumbsDown,
-                                      size: 50,
-                                      color: Colors.black,
-                                    ),
-                                    onPressed: () {
-                                      isSelectedDown = !isSelectedDown;
-                                      if (isSelectedDown == true)
-                                        isSelectedUp = false;
-                                      setState(() {});
-                                    })),
-                        SizedBox(
-                          width: 50,
-                        ),
-                        isSelectedUp
-                            ? IconButton(
-                                icon: Icon(FontAwesomeIcons.solidThumbsUp,
-                                    color: Colors.white, size: 50),
-                                onPressed: () {
-                                  isSelectedUp = !isSelectedUp;
-                                  if (isSelectedUp == true)
-                                    isSelectedDown = false;
-                                  setState(() {});
-                                })
-                            : IconButton(
-                                icon: Icon(
-                                  FontAwesomeIcons.thumbsUp,
-                                  size: 50,
-                                  color: Colors.black,
-                                ),
-                                onPressed: () {
-                                  isSelectedUp = !isSelectedUp;
-                                  if (isSelectedUp == true)
-                                    isSelectedDown = false;
-                                  setState(() {});
-                                }),
-                      ],
-                    )
-                  ],
-                )),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: IconButton(
-                        alignment: Alignment.bottomLeft,
-                        icon: Icon(
-                          CupertinoIcons.left_chevron,
-                          color: Colors.black,
-                        ),
-                        iconSize: 60,
-                        onPressed: () {
-                          widget.callback(widget.curState, "back",null);
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: IconButton(
-                        alignment: Alignment.center,
-                        icon: Icon(
-                          Icons.volume_up,
-                          color: Colors.black,
-                        ),
-                        iconSize: 50,
-                        onPressed: () {},
-                      ),
-                    ),
-                    Expanded(
-                      child: IconButton(
-                        alignment: Alignment.bottomRight,
-                        icon: Icon(
-                          CupertinoIcons.right_chevron,
-                          color: Colors.black,
-                        ),
-                        iconSize: 60,
-                        onPressed: () {
-                          widget.callback(widget.curState, "next",null);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            )),
-          ],
-        ),
-      ),
-    );
-  }
-*/
 }

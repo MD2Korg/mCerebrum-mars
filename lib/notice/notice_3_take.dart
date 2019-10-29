@@ -5,8 +5,8 @@ import 'notice_abstract.dart';
 class NoticeExperienceDetail extends NoticeAbstract {
 
   NoticeExperienceDetail(String curState,
-      void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/notice_1.png');
+      callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/notice_1.png');
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {

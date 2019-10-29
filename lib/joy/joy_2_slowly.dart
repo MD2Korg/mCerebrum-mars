@@ -5,8 +5,8 @@ import 'package:mars/joy/joy_abstract.dart';
 
 
 class Joy2Slowly extends JoyAbstract {
-  Joy2Slowly(String curState, void Function(String, String,String) callback)
-      : super(curState, callback, 'assets/joy_0.png');
+  Joy2Slowly(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/joy_0.png');
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {

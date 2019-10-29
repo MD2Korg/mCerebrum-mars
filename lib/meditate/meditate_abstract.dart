@@ -5,8 +5,8 @@ import '../widget_abstract.dart';
 
 abstract class MeditateAbstract extends WidgetAbstract {
 
-  MeditateAbstract(curState, callback, backgroundImage,
-      {hasBack = true,hasForward = true,hasVolume = true,hasLowerBar = true}):super(curState, callback, backgroundImage,hasBack: hasBack, hasForward:hasForward, hasVolume:hasVolume, hasLowerBar:hasLowerBar);
+  MeditateAbstract(curState, callback, callbackLog, backgroundImage,
+      {hasBack = true,hasForward = true,hasVolume = true,hasLowerBar = true}):super(curState, callback, callbackLog, backgroundImage,hasBack: hasBack, hasForward:hasForward, hasVolume:hasVolume, hasLowerBar:hasLowerBar);
 
   Widget myWidget(BuildContext context, Function() refresh);
 
@@ -16,6 +16,7 @@ abstract class MeditateAbstract extends WidgetAbstract {
 
 class _MoodSurfAbstractState extends State<MeditateAbstract> {
   void refresh() {
+    if(!mounted) return;
     setState(() {
     });
   }
@@ -24,6 +25,7 @@ class _MoodSurfAbstractState extends State<MeditateAbstract> {
     Size size = MediaQuery.of(context).size;
     return new WillPopScope(
         onWillPop: () async {
+          widget.callbackLog(widget.curState, "back_button", "pressed");
           widget.callback(widget.curState, "back",widget.data);
           return false;
         },
@@ -47,6 +49,7 @@ class _MoodSurfAbstractState extends State<MeditateAbstract> {
             highlightColor: Colors.white,
             focusColor: Colors.white,
             onPressed: (){
+              widget.callbackLog(widget.curState, "home_button", "pressed");
               showAlertDialog(context);
             },
           ),
@@ -69,6 +72,7 @@ class _MoodSurfAbstractState extends State<MeditateAbstract> {
                         ),
                         iconSize: 60,
                         onPressed: () {
+                          widget.callbackLog(widget.curState, "back_button", "pressed");
                           widget.callback(widget.curState, "back",widget.data);
                         },
                       ):Container(),
@@ -81,7 +85,10 @@ class _MoodSurfAbstractState extends State<MeditateAbstract> {
                           color: Colors.white,
                         ),
                         iconSize: 50,
-                        onPressed: () {},
+                        onPressed: () {
+                          widget.callbackLog(widget.curState, "audio_button", "pressed");
+
+                        },
                       ):Container(),
                     ),
                     Expanded(
@@ -93,6 +100,7 @@ class _MoodSurfAbstractState extends State<MeditateAbstract> {
                         ),
                         iconSize: 60,
                         onPressed: () {
+                          widget.callbackLog(widget.curState, "next_button", "pressed");
                           widget.callback(widget.curState, "next",widget.data);
                         },
                       ):Container(),
@@ -112,6 +120,7 @@ class _MoodSurfAbstractState extends State<MeditateAbstract> {
       shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
       child: Text("Yes", style: TextStyle(color: Colors.white, fontSize: 18),),
       onPressed: () {
+        widget.callbackLog(widget.curState, "quit_exercise", "yes pressed");
         widget.callback(widget.curState, "home",null);
         Navigator.of(context).pop(); // dismiss dialog
 
@@ -122,6 +131,7 @@ class _MoodSurfAbstractState extends State<MeditateAbstract> {
       shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
       child: Text("No", style: TextStyle(color: Colors.white, fontSize: 18),),
       onPressed: () {
+        widget.callbackLog(widget.curState, "quit_exercise", "no pressed");
         Navigator.of(context).pop(); // dismiss dialog
 
       },

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'imagine_abstract.dart';
 
 class Imagine1 extends ImagineAbstract {
-  Imagine1(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/imagine_1.png');
+  Imagine1(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/imagine_1.png');
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'imagine_abstract.dart';
 
-class ImagineIntro extends ImagineAbstract {
-  ImagineIntro(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/imagine_1.png', hasBack:false, hasForward:false);
+class Imagine0Begin extends ImagineAbstract {
+  Imagine0Begin(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/imagine_1.png', hasBack:false, hasForward:false);
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
@@ -43,6 +43,7 @@ class ImagineIntro extends ImagineAbstract {
                       style: TextStyle(color: Colors.black),
                     ),
                     onPressed: () {
+                      callbackLog(curState, "begin_button", "pressed");
                       callback(curState, "begin",null);
                     },
                   ),

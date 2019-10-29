@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'meditate_abstract.dart';
 
 class MeditateMenu extends MeditateAbstract {
-  MeditateMenu(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/meditate_1.png',hasBack:false, hasForward:false);
+  MeditateMenu(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/meditate_1.png',hasBack:false, hasForward:false);
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
@@ -30,6 +30,7 @@ class MeditateMenu extends MeditateAbstract {
                   ),
                   onPressed: () {
                     data="peak";
+                    callbackLog(curState, data, "pressed");
                     callback(curState, "next", "peak");
                   },
                 ),
@@ -48,6 +49,7 @@ class MeditateMenu extends MeditateAbstract {
                   ),
                   onPressed: () {
                     data="breath";
+                    callbackLog(curState, data, "pressed");
                     callback(curState, "next","breath");
                   },
                 ),
@@ -66,6 +68,7 @@ class MeditateMenu extends MeditateAbstract {
                   ),
                   onPressed: () {
                     data="walk";
+                    callbackLog(curState, data, "pressed");
                     callback(curState, "next", "walk");
                   },
                 ),
@@ -84,6 +87,7 @@ class MeditateMenu extends MeditateAbstract {
                   ),
                   onPressed: () {
                     data="intro";
+                    callbackLog(curState, data, "pressed");
                     callback(curState, "next","intro");
                   },
                 ),
@@ -102,6 +106,7 @@ class MeditateMenu extends MeditateAbstract {
                   ),
                   onPressed: () {
                     data="mind";
+                    callbackLog(curState, data, "pressed");
                     callback(curState, "next","mind");
                   },
                 ),
@@ -120,6 +125,7 @@ class MeditateMenu extends MeditateAbstract {
                   ),
                   onPressed: () {
                     data="aware";
+                    callbackLog(curState, data, "pressed");
                     callback(curState, "next","aware");
                   },
                 ),
@@ -138,6 +144,7 @@ class MeditateMenu extends MeditateAbstract {
                   ),
                   onPressed: () {
                     data="body";
+                    callbackLog(curState, data, "pressed");
                     callback(curState, "next","body");
                   },
                 ),
@@ -156,6 +163,7 @@ class MeditateMenu extends MeditateAbstract {
                   ),
                   onPressed: () {
                     data="sound";
+                    callbackLog(curState, data, "pressed");
                     callback(curState, "next","sound");
                   },
                 ),

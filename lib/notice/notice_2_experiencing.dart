@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -5,25 +6,30 @@ import 'package:flutter/material.dart';
 import 'notice_abstract.dart';
 
 class NoticeExperience extends NoticeAbstract {
-  final Map<String, bool> map = {
-    'tension': false,
-    'calmness': false,
-    'shakiness': false,
-    'stillness': false,
-    'pain': false,
-    'warmth': false,
-    'tightness': false,
-    'sweatiness': false,
-    'restlessness': false,
-    'fluttering': false,
-    'irritability': false,
-    'soreness': false,
-    'other_physical_sensation': false,
-  };
+   Map<String, bool> map;
+   int noneOfThemAbove;
+  @override
+  Future<void> init() async{
+    noneOfThemAbove = 0;
+    map = {
+      'tension': false,
+      'calmness': false,
+      'shakiness': false,
+      'stillness': false,
+      'pain': false,
+      'warmth': false,
+      'tightness': false,
+      'sweatiness': false,
+      'restlessness': false,
+      'fluttering': false,
+      'irritability': false,
+      'soreness': false,
+      'other_physical_sensation': false,
+    };
+  }
 
-  int noneOfThemAbove = 0;
-  NoticeExperience(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/notice_1.png');
+  NoticeExperience(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/notice_1.png');
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
     return Column(
@@ -58,7 +64,8 @@ class NoticeExperience extends NoticeAbstract {
                           bool res = map["tension"];
                           map["tension"]=!res;
                           noneOfThemAbove=-1;
-                         refresh(); 
+                          callbackLog(curState, "tension_button", map["tension"]?"selected":"unselected");
+                         refresh();
                         },
                       ),
                     ),
@@ -79,6 +86,7 @@ class NoticeExperience extends NoticeAbstract {
                             bool res = map["calmness"];
                             map["calmness"]=!res;
                             noneOfThemAbove=-1;
+                            callbackLog(curState, "calmness_button", map["calmness"]?"selected":"unselected");
                             refresh();
                             //  widget.callback(widget.curState, "wish"),
                           },
@@ -109,6 +117,7 @@ class NoticeExperience extends NoticeAbstract {
                           bool res = map["shakiness"];
                           map["shakiness"]=!res;
                           noneOfThemAbove=-1;
+                          callbackLog(curState, "shakiness_button", map["shakiness"]?"selected":"unselected");
                           refresh();
 
                           //  widget.callback(widget.curState, "wish"),
@@ -131,6 +140,7 @@ class NoticeExperience extends NoticeAbstract {
                         onPressed: ()  {
                           bool res = map["stillness"];
                           map["stillness"]=!res;
+                          callbackLog(curState, "stillness_button", map["stillness"]?"selected":"unselected");
                           noneOfThemAbove=-1;
                           refresh();
 
@@ -160,6 +170,7 @@ class NoticeExperience extends NoticeAbstract {
                         onPressed: ()  {
                           bool res = map["pain"];
                           map["pain"]=!res;
+                          callbackLog(curState, "pain_button", map["pain"]?"selected":"unselected");
                           noneOfThemAbove=-1;
                           refresh();
                           //  widget.callback(widget.curState, "wish"),
@@ -181,6 +192,7 @@ class NoticeExperience extends NoticeAbstract {
                         onPressed: ()  {
                           bool res = map["warmth"];
                           map["warmth"]=!res;
+                          callbackLog(curState, "warmth_button", map["warmth"]?"selected":"unselected");
                           noneOfThemAbove=-1;
                           refresh();
 
@@ -210,6 +222,7 @@ class NoticeExperience extends NoticeAbstract {
                         onPressed: ()  {
                           bool res = map["tightness"];
                           map["tightness"]=!res;
+                          callbackLog(curState, "tightness_button", map["tightness"]?"selected":"unselected");
                           noneOfThemAbove=-1;
                           refresh();
 
@@ -235,6 +248,7 @@ class NoticeExperience extends NoticeAbstract {
                           bool res = map["sweatiness"];
                           map["sweatiness"]=!res;
                           noneOfThemAbove=-1;
+                          callbackLog(curState, "sweatiness_button", map["sweatiness"]?"selected":"unselected");
                           refresh();
 
                           //  widget.callback(widget.curState, "wish"),
@@ -265,6 +279,7 @@ class NoticeExperience extends NoticeAbstract {
                           bool res = map["restlessness"];
                           map["restlessness"]=!res;
                           noneOfThemAbove=-1;
+                          callbackLog(curState, "restlessness_button", map["restlessness"]?"selected":"unselected");
                           refresh();
 
                           //  widget.callback(widget.curState, "wish"),
@@ -286,6 +301,7 @@ class NoticeExperience extends NoticeAbstract {
                           bool res = map["fluttering"];
                           map["fluttering"]=!res;
                           noneOfThemAbove=-1;
+                          callbackLog(curState, "fluttering_button", map["fluttering"]?"selected":"unselected");
                           refresh();
 
                           //  widget.callback(widget.curState, "wish"),
@@ -316,6 +332,7 @@ class NoticeExperience extends NoticeAbstract {
                           bool res = map["irritability"];
                           map["irritability"]=!res;
                           noneOfThemAbove=-1;
+                          callbackLog(curState, "irritability_button", map["irritability"]?"selected":"unselected");
                           refresh();
 
                           //  widget.callback(widget.curState, "wish"),
@@ -336,6 +353,7 @@ class NoticeExperience extends NoticeAbstract {
                         onPressed: ()  {
                           bool res = map["soreness"];
                           map["soreness"]=!res;
+                          callbackLog(curState, "soreness_button", map["soreness"]?"selected":"unselected");
                           noneOfThemAbove=-1;
                           refresh();
 
@@ -365,6 +383,7 @@ class NoticeExperience extends NoticeAbstract {
                         onPressed: ()  {
                           bool res = map["other_physical_sensation"];
                           map["other_physical_sensation"]=!res;
+                          callbackLog(curState, "other_physical_sensation_button", map["other_physical_sensation"]?"selected":"unselected");
                           noneOfThemAbove=-1;
                           refresh();
 
@@ -402,6 +421,7 @@ class NoticeExperience extends NoticeAbstract {
                                 map["irritability"] = false;
                                 map["soreness"] = false;
                                 map["other_physical_sensation"] = false;
+                        callbackLog(curState, "none_of_them_above_button", "selected");
                           refresh();
                           //  widget.callback(widget.curState, "wish"),
                         },
@@ -427,12 +447,17 @@ class NoticeExperience extends NoticeAbstract {
     if(map["irritability"] == true) data.add("irritability");
     if(map["soreness"] == true) data.add("soreness");
     if(data.length==0){
+      callbackLog(curState, "random_selection", "physical sensation");
       return "physical sensation";
-    }else if(data.length==1)
+    }else if(data.length==1) {
+      callbackLog(curState, "random_selection", data[0]);
       return data[0];
+    }
     else{
       Random r = new Random();
-      return data[r.nextInt(data.length)];
+      int x = r.nextInt(data.length);
+      callbackLog(curState, "random_selection", data[x]);
+      return data[x];
     }
   }
 }

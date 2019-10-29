@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'moodsurf_abstract.dart';
 
 class MoodSurfPage0 extends MoodSurfAbstract {
-  MoodSurfPage0(String curState, void Function(String, String,String) callback)
-      : super(curState, callback, 'assets/moodsurf_1.png', hasBack:false, hasForward:false);
+  MoodSurfPage0(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/moodsurf_1.png', hasBack:false, hasForward:false);
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
@@ -39,6 +39,7 @@ class MoodSurfPage0 extends MoodSurfAbstract {
                             style: TextStyle(color: Colors.black),
                           ),
                           onPressed: ()  {
+                            callbackLog(curState, "begin_button", "pressed");
                             callback(curState, "next",null);
                           },
                         ),

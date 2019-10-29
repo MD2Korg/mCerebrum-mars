@@ -6,8 +6,8 @@ import 'package:mars/joy/joy_abstract.dart';
 
 
 class Joy8Like extends JoyAbstract {
-  Joy8Like(String curState, void Function(String, String,String) callback)
-      : super(curState, callback, 'assets/joy_0.png');
+  Joy8Like(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/joy_0.png');
   bool isSelectedUp = false;
   bool isSelectedDown = false;
 
@@ -32,8 +32,8 @@ class Joy8Like extends JoyAbstract {
                             iconSize: 70,
                             onPressed: () {
                               isSelectedDown = !isSelectedDown;
-                              if (isSelectedDown == true)
                                 isSelectedUp = false;
+                              callbackLog(curState, "unlike_button", isSelectedDown?"selected":"unselected");
                               refresh();
                             })
                             : IconButton(
@@ -44,8 +44,8 @@ class Joy8Like extends JoyAbstract {
                             iconSize: 70,
                             onPressed: () {
                               isSelectedDown = !isSelectedDown;
-                              if (isSelectedDown == true)
                                 isSelectedUp = false;
+                              callbackLog(curState, "unlike_button", isSelectedDown?"selected":"unselected");
                               refresh();
                             })),
                     SizedBox(
@@ -58,8 +58,8 @@ class Joy8Like extends JoyAbstract {
                         iconSize: 70,
                         onPressed: () {
                           isSelectedUp = !isSelectedUp;
-                          if (isSelectedUp == true)
                             isSelectedDown = false;
+                          callbackLog(curState, "like_button", isSelectedUp?"selected":"unselected");
                           refresh();
                         })
                         : IconButton(
@@ -70,8 +70,8 @@ class Joy8Like extends JoyAbstract {
                         iconSize: 70,
                         onPressed: () {
                           isSelectedUp = !isSelectedUp;
-                          if (isSelectedUp == true)
                             isSelectedDown = false;
+                          callbackLog(curState, "like_button", isSelectedUp?"selected":"unselected");
                           refresh();
                         }),
                   ],

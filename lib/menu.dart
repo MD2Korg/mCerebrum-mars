@@ -4,7 +4,7 @@ import 'widget_abstract.dart';
 
 class Menu extends WidgetAbstract {
 
-  Menu(curState, callback) :super(curState, callback, null);
+  Menu(curState, callback, callbackLog) :super(curState, callback, callbackLog, null);
 
   @override
   _JoyAbstractState createState() => _JoyAbstractState();

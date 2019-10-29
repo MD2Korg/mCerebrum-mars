@@ -4,10 +4,15 @@ import 'package:flutter_colorpicker/block_picker.dart';
 import 'imagine_abstract.dart';
 
 class ImagineColorChoose extends ImagineAbstract {
-  ImagineColorChoose(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/imagine_1.png');
+  ImagineColorChoose(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/imagine_1.png');
   Color pickerColor = Color(0xffffff);
   Color currentColor = Color(0xffffff);
+  @override
+  Future<void> init() async{
+    pickerColor = Color(0xffffff);
+    currentColor = Color(0xffffff);
+  }
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
     return Column(
@@ -71,6 +76,7 @@ class ImagineColorChoose extends ImagineAbstract {
              },
              onColorChanged: (Color color){
                pickerColor = color;
+               callbackLog(curState, "color_chooser", "value="+color.value.toRadixString(16));
                refresh();
              },
              availableColors: [

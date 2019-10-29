@@ -1,17 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'notice_abstract.dart';
 
-class NoticeExperienceQ extends NoticeAbstract {
-  NoticeExperienceQ(
-      String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/notice_1.png');
-  final Map<String, bool> map = {
-    'one': false,
-    'multiple': false,
-    'changing': false,
-    'same': false
-  };
+class NoticeExperienceQ2 extends NoticeAbstract {
+  NoticeExperienceQ2(
+      String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/notice_1.png');
+   Map<String, bool> map;
+  @override
+  Future<void> init() async{
+    map = {
+      'strong': false,
+      'weak': false,
+      'yes': false,
+      'no': false,
+    };
+  }
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
@@ -33,12 +39,13 @@ class NoticeExperienceQ extends NoticeAbstract {
       Container(
         padding: EdgeInsets.only(top: 10),
         child: Text(
-          'is it in one place or in\nmultiple places in your body?',
+          'Is it...',
           textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.black),
         ),
       ),
       Padding(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(10),
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -48,19 +55,19 @@ class NoticeExperienceQ extends NoticeAbstract {
             width: 130.0,
             child: SizedBox(
               child: RaisedButton(
-                color: map["one"] == true ? Color(0xfffbb299) : Colors.white,
+                color: map["strong"] == true ? Color(0xfffbb299) : Colors.white,
                 shape: RoundedRectangleBorder(
                     side: BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.circular(8)),
                 child: Text(
-                  'One',
+                  'Strong',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.black),
                 ),
                 onPressed: () {
-                  bool res = map["one"];
-                  map["one"] = !res;
-                  map["multiple"] = false;
+                  bool res = map["strong"];
+                  map["strong"] = !res;
+                  map["weak"] = false;
                   refresh();
                 },
               ),
@@ -71,20 +78,19 @@ class NoticeExperienceQ extends NoticeAbstract {
             width: 130.0,
             child: SizedBox(
               child: RaisedButton(
-                color:
-                    map["multiple"] == true ? Color(0xfffbb299) : Colors.white,
+                color: map["weak"] == true ? Color(0xfffbb299) : Colors.white,
                 shape: RoundedRectangleBorder(
                     side: BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.circular(8)),
                 child: Text(
-                  'Multiple',
+                  'Weak',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.black),
                 ),
                 onPressed: () {
-                  bool res = map["multiple"];
-                  map["multiple"] = !res;
-                  map["one"] = false;
+                  bool res = map["weak"];
+                  map["weak"] = !res;
+                  map["strong"] = false;
                   refresh();
                 },
               ),
@@ -93,12 +99,15 @@ class NoticeExperienceQ extends NoticeAbstract {
         ],
       ),
       Container(
-        padding: EdgeInsets.only(top: 30, bottom: 30),
+        padding: EdgeInsets.all(30),
         child: Text(
-          'is it changing or does it\nalways stay the same? ',
+          'Are there places in your body where you dont feel it? ',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
+      ),
+      Padding(
+        padding: EdgeInsets.all(0),
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -108,20 +117,19 @@ class NoticeExperienceQ extends NoticeAbstract {
             width: 130.0,
             child: SizedBox(
               child: RaisedButton(
-                color:
-                    map["changing"] == true ? Color(0xfffbb299) : Colors.white,
+                color: map["yes"] == true ? Color(0xfffbb299) : Colors.white,
                 shape: RoundedRectangleBorder(
                     side: BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.circular(8)),
                 child: Text(
-                  'Changing',
+                  'Yes',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.black),
                 ),
                 onPressed: () {
-                  bool res = map["changing"];
-                  map["changing"] = !res;
-                  map["same"] = false;
+                  bool res = map["yes"];
+                  map["yes"] = !res;
+                  map["no"] = false;
                   refresh();
                 },
               ),
@@ -132,19 +140,19 @@ class NoticeExperienceQ extends NoticeAbstract {
             width: 130.0,
             child: SizedBox(
               child: RaisedButton(
-                color: map["same"] == true ? Color(0xfffbb299) : Colors.white,
+                color: map["no"] == true ? Color(0xfffbb299) : Colors.white,
                 shape: RoundedRectangleBorder(
                     side: BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.circular(8)),
                 child: Text(
-                  'Same',
+                  'No',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.black),
                 ),
                 onPressed: () {
-                  bool res = map["same"];
-                  map["same"] = !res;
-                  map["changing"] = false;
+                  bool res = map["no"];
+                  map["no"] = !res;
+                  map["yes"] = false;
                   refresh();
                 },
               ),

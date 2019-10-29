@@ -5,8 +5,8 @@ import 'imagine_abstract.dart';
 
 class ImagineRemember extends ImagineAbstract {
   ImagineRemember(
-      String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/imagine_4.png');
+      String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/imagine_4.png');
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {

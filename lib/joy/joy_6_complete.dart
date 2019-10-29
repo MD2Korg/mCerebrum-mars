@@ -5,8 +5,8 @@ import 'package:mars/joy/joy_abstract.dart';
 
 
 class Joy6Complete extends JoyAbstract {
-  Joy6Complete(String curState, void Function(String, String,String) callback)
-      : super(curState, callback, 'assets/joy_1.png',hasBack:false);
+  Joy6Complete(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/joy_1.png',hasBack:false);
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {

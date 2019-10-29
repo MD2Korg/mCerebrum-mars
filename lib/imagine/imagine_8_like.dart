@@ -1,14 +1,22 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'meditate_abstract.dart';
+import 'imagine_abstract.dart';
 
-class MeditateLike extends MeditateAbstract {
-  MeditateLike(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/meditate_2.png');
+class ImagineLike extends ImagineAbstract {
+  ImagineLike(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/imagine_1.png');
 
   bool isSelectedUp = false;
   bool isSelectedDown = false;
+  @override
+  Future<void> init() async{
+    isSelectedUp = false;
+    isSelectedDown = false;
+  }
+
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
 
@@ -16,7 +24,7 @@ class MeditateLike extends MeditateAbstract {
       Padding(padding: EdgeInsets.only(top: 200),),
       Text("Was this exercise\nhelpful?",
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white)),
+          style: TextStyle(color: Colors.black)),
       Padding(padding: EdgeInsets.only(top: 20),),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,24 +34,26 @@ class MeditateLike extends MeditateAbstract {
               child: isSelectedDown
                   ? IconButton(
                   icon: Icon(FontAwesomeIcons.thumbsDown,
-                      color: Color(0xffd650e5)),
+                      color: Color(0xffe56161)),
                   iconSize: 70,
                   onPressed: () {
                     isSelectedDown = !isSelectedDown;
                     if (isSelectedDown == true)
                       isSelectedUp = false;
+                    callbackLog(curState, "unlike_button", isSelectedDown?"selected":"unselected");
                     refresh();
                   })
                   : IconButton(
                   icon: Icon(
                     FontAwesomeIcons.thumbsDown,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                   iconSize: 70,
                   onPressed: () {
                     isSelectedDown = !isSelectedDown;
                     if (isSelectedDown == true)
                       isSelectedUp = false;
+                    callbackLog(curState, "unlike_button", isSelectedDown?"selected":"unselected");
                     refresh();
                   })),
           SizedBox(
@@ -52,24 +62,24 @@ class MeditateLike extends MeditateAbstract {
           isSelectedUp
               ? IconButton(
               icon: Icon(FontAwesomeIcons.thumbsUp,
-                  color: Color(0xffd650e5)),
+                  color: Color(0xffe56161)),
               iconSize: 70,
               onPressed: () {
                 isSelectedUp = !isSelectedUp;
-                if (isSelectedUp == true)
+                callbackLog(curState, "like_button", isSelectedUp?"selected":"unselected");
                   isSelectedDown = false;
                 refresh();
               })
               : IconButton(
               icon: Icon(
                 FontAwesomeIcons.thumbsUp,
-                color: Colors.white,
+                color: Colors.black,
               ),
               iconSize: 70,
               onPressed: () {
                 isSelectedUp = !isSelectedUp;
-                if (isSelectedUp == true)
                   isSelectedDown = false;
+                callbackLog(curState, "like_button", isSelectedUp?"selected":"unselected");
                 refresh();
               }),
         ],

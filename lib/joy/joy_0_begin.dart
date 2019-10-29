@@ -5,8 +5,8 @@ import 'package:mars/joy/joy_abstract.dart';
 
 
 class Joy0Begin extends JoyAbstract {
-  Joy0Begin(String curState, void Function(String, String,String) callback)
-      : super(curState, callback, 'assets/joy_0.png', hasBack:false, hasForward:false);
+  Joy0Begin(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/joy_0.png', hasBack:false, hasForward:false);
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
@@ -38,6 +38,7 @@ class Joy0Begin extends JoyAbstract {
                             style: TextStyle(color: Colors.black),
                           ),
                           onPressed: ()  {
+                            callbackLog(curState, "begin_button", "pressed");
                             callback(curState, "next",null);
                           },
                         ),

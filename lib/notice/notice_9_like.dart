@@ -3,11 +3,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mars/notice/notice_abstract.dart';
 
 class NoticeLike extends NoticeAbstract {
-  NoticeLike(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/notice_1.png');
+  NoticeLike(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/notice_1.png');
 
   bool isSelectedUp = false;
   bool isSelectedDown = false;
+  @override
+  Future<void> init() async{
+    isSelectedDown = false;
+    isSelectedUp = false;
+  }
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
@@ -29,8 +34,8 @@ class NoticeLike extends NoticeAbstract {
                   iconSize: 70,
                   onPressed: () {
                     isSelectedDown = !isSelectedDown;
-                    if (isSelectedDown == true)
                       isSelectedUp = false;
+                    callbackLog(curState, "unlike_button", isSelectedDown?"selected":"unselected");
                     refresh();
                   })
                   : IconButton(
@@ -41,8 +46,8 @@ class NoticeLike extends NoticeAbstract {
                   iconSize: 70,
                   onPressed: () {
                     isSelectedDown = !isSelectedDown;
-                    if (isSelectedDown == true)
                       isSelectedUp = false;
+                    callbackLog(curState, "unlike_button", isSelectedDown?"selected":"unselected");
                     refresh();
                   })),
           SizedBox(
@@ -55,8 +60,8 @@ class NoticeLike extends NoticeAbstract {
               iconSize: 70,
               onPressed: () {
                 isSelectedUp = !isSelectedUp;
-                if (isSelectedUp == true)
                   isSelectedDown = false;
+                callbackLog(curState, "like_button", isSelectedUp?"selected":"unselected");
                 refresh();
               })
               : IconButton(
@@ -67,8 +72,8 @@ class NoticeLike extends NoticeAbstract {
               iconSize: 70,
               onPressed: () {
                 isSelectedUp = !isSelectedUp;
-                if (isSelectedUp == true)
                   isSelectedDown = false;
+                callbackLog(curState, "like_button", isSelectedUp?"selected":"unselected");
                 refresh();
               }),
         ],

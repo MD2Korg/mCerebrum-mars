@@ -1,16 +1,29 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'imagine_abstract.dart';
 
 class ImagineResponse extends ImagineAbstract {
-  ImagineResponse(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/imagine_1.png');
+  ImagineResponse(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/imagine_1.png');
   bool isSmall = false, isLarge = false;
   bool isSmooth = false, isRough = false;
   bool isSoft = false, isHard = false;
   bool isLight = false, isHeavy = false;
 
+  @override
+  Future<void> init() async{
+    isSmall = false;
+    isLarge = false;
+    isSmooth = false;
+    isRough = false;
+    isSoft = false;
+    isHard = false;
+    isLight = false;
+    isHeavy = false;
+  }
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
     return Column(
@@ -56,6 +69,7 @@ class ImagineResponse extends ImagineAbstract {
                     onPressed: () {
                       isLarge = false;
                       isSmall = !isSmall;
+                      callbackLog(curState, "small_button", isSmall?"selected":"unselected");
                       refresh();
                     },
                   ),
@@ -86,6 +100,7 @@ class ImagineResponse extends ImagineAbstract {
                     onPressed: () {
                       isSmall = false;
                       isLarge = !isLarge;
+                      callbackLog(curState, "large_button", isLarge?"selected":"unselected");
                       refresh();
                     },
                   ),
@@ -117,6 +132,7 @@ class ImagineResponse extends ImagineAbstract {
                     onPressed: () {
                       isRough = false;
                       isSmooth = !isSmooth;
+                      callbackLog(curState, "smooth_button", isSmooth?"selected":"unselected");
                       refresh();
                     },
                   ),
@@ -147,6 +163,7 @@ class ImagineResponse extends ImagineAbstract {
                     onPressed: () {
                       isSmooth = false;
                       isRough = !isRough;
+                      callbackLog(curState, "rough_button", isRough?"selected":"unselected");
                       refresh();
                     },
                   ),
@@ -178,6 +195,7 @@ class ImagineResponse extends ImagineAbstract {
                     onPressed: () {
                       isHard = false;
                       isSoft = !isSoft;
+                      callbackLog(curState, "soft_button", isSoft?"selected":"unselected");
                       refresh();
                     },
                   ),
@@ -208,6 +226,7 @@ class ImagineResponse extends ImagineAbstract {
                     onPressed: () {
                       isSoft = false;
                       isHard = !isHard;
+                      callbackLog(curState, "hard_button", isHard?"selected":"unselected");
                       refresh();
                     },
                   ),
@@ -239,6 +258,7 @@ class ImagineResponse extends ImagineAbstract {
                     onPressed: () {
                       isHeavy = false;
                       isLight = !isLight;
+                      callbackLog(curState, "light_button", isLight?"selected":"unselected");
                       refresh();
                     },
                   ),
@@ -269,6 +289,7 @@ class ImagineResponse extends ImagineAbstract {
                     onPressed: () {
                       isLight = false;
                       isHeavy = !isHeavy;
+                      callbackLog(curState, "heavy_button", isHeavy?"selected":"unselected");
                       refresh();
                     },
                   ),

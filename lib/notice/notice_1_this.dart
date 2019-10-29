@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'notice_abstract.dart';
 
 class NoticeIntro extends NoticeAbstract {
-  NoticeIntro(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/notice_1.png');
+  NoticeIntro(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/notice_1.png');
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {

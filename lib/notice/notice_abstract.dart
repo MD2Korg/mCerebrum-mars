@@ -4,8 +4,8 @@ import 'package:mars/widget_abstract.dart';
 
 abstract class NoticeAbstract extends WidgetAbstract {
 
-  NoticeAbstract(curState, callback, backgroundImage,
-      {hasBack = true,hasForward = true,hasVolume = true,hasLowerBar = true}):super(curState, callback, backgroundImage,hasBack: hasBack, hasForward:hasForward, hasVolume:hasVolume, hasLowerBar:hasLowerBar);
+  NoticeAbstract(curState, callback, callbackLog, backgroundImage,
+      {hasBack = true,hasForward = true,hasVolume = true,hasLowerBar = true}):super(curState, callback, callbackLog, backgroundImage,hasBack: hasBack, hasForward:hasForward, hasVolume:hasVolume, hasLowerBar:hasLowerBar);
 
 
   Widget myWidget(BuildContext context, Function() refresh);
@@ -17,6 +17,7 @@ abstract class NoticeAbstract extends WidgetAbstract {
 
 class _NoticeAbstractState extends State<NoticeAbstract> {
   void refresh() {
+    if(!mounted) return;
     setState(() {});
   }
 
@@ -25,6 +26,7 @@ class _NoticeAbstractState extends State<NoticeAbstract> {
     Size size = MediaQuery.of(context).size;
     return new WillPopScope(
         onWillPop: () async {
+          widget.callbackLog(widget.curState, "back_button", "pressed");
           widget.callback(widget.curState, "back", null);
           return false;
         },
@@ -47,6 +49,7 @@ class _NoticeAbstractState extends State<NoticeAbstract> {
               highlightColor: Colors.white,
               focusColor: Colors.white,
               onPressed: () {
+                widget.callbackLog(widget.curState, "home_button", "pressed");
                 showAlertDialog(context);
               },
             ),
@@ -70,6 +73,7 @@ class _NoticeAbstractState extends State<NoticeAbstract> {
                               ),
                               iconSize: 60,
                               onPressed: () {
+                                widget.callbackLog(widget.curState, "back_button", "pressed");
                                 widget.callback(widget.curState, "back",widget.getData());
                               },
                             )
@@ -83,7 +87,9 @@ class _NoticeAbstractState extends State<NoticeAbstract> {
                           color: Colors.black,
                         ),
                         iconSize: 50,
-                        onPressed: () {},
+                        onPressed: () {
+                          widget.callbackLog(widget.curState, "audio_button", "pressed");
+                        },
                       ):Container(),
                     ),
                     Expanded(
@@ -96,6 +102,7 @@ class _NoticeAbstractState extends State<NoticeAbstract> {
                               ),
                               iconSize: 60,
                               onPressed: () {
+                                widget.callbackLog(widget.curState, "next_button", "pressed");
                                 widget.callback(widget.curState, "next",widget.getData());
                               },
                             )
@@ -120,6 +127,7 @@ class _NoticeAbstractState extends State<NoticeAbstract> {
         style: TextStyle(color: Colors.white, fontSize: 18),
       ),
       onPressed: () {
+        widget.callbackLog(widget.curState, "quit_exercise", "yes pressed");
         widget.callback(widget.curState, "home",null);
         Navigator.of(context).pop(); // dismiss dialog
       },
@@ -133,6 +141,7 @@ class _NoticeAbstractState extends State<NoticeAbstract> {
         style: TextStyle(color: Colors.white, fontSize: 18),
       ),
       onPressed: () {
+        widget.callbackLog(widget.curState, "quit_exercise", "no pressed");
         Navigator.of(context).pop(); // dismiss dialog
       },
     );

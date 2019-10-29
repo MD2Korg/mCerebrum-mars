@@ -3,7 +3,7 @@ import 'package:mars/widget_abstract.dart';
 
 class MainLogo extends WidgetAbstract {
 
-  MainLogo(currentState, callback):super(currentState, callback, null);
+  MainLogo(curState, callback, callbackLog):super(curState, callback, callbackLog, null);
   @override
   _MainLogoState createState() => _MainLogoState();
 

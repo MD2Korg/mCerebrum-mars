@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'moodsurf_abstract.dart';
 
 class MoodSurfPage3 extends MoodSurfAbstract {
-  MoodSurfPage3(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/moodsurf_4.png');
+  MoodSurfPage3(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/moodsurf_4.png');
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {

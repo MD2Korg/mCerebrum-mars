@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mars/imagine/imagine_abstract.dart';
 
 class Imagine2 extends ImagineAbstract {
-  Imagine2(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/imagine_2.png');
+  Imagine2(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/imagine_2.png');
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {

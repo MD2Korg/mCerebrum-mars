@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'imagine_abstract.dart';
+import 'meditate_abstract.dart';
 
-class ImagineLike extends ImagineAbstract {
-  ImagineLike(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/imagine_1.png');
+class MeditateLike extends MeditateAbstract {
+  MeditateLike(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/meditate_2.png');
 
   bool isSelectedUp = false;
   bool isSelectedDown = false;
@@ -16,7 +16,7 @@ class ImagineLike extends ImagineAbstract {
       Padding(padding: EdgeInsets.only(top: 200),),
       Text("Was this exercise\nhelpful?",
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.black)),
+          style: TextStyle(color: Colors.white)),
       Padding(padding: EdgeInsets.only(top: 20),),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,23 +26,23 @@ class ImagineLike extends ImagineAbstract {
               child: isSelectedDown
                   ? IconButton(
                   icon: Icon(FontAwesomeIcons.thumbsDown,
-                      color: Color(0xffe56161)),
+                      color: Color(0xffd650e5)),
                   iconSize: 70,
                   onPressed: () {
                     isSelectedDown = !isSelectedDown;
-                    if (isSelectedDown == true)
+                    callbackLog(curState, "unlike_button", isSelectedDown?"selected":"unselected");
                       isSelectedUp = false;
                     refresh();
                   })
                   : IconButton(
                   icon: Icon(
                     FontAwesomeIcons.thumbsDown,
-                    color: Colors.black,
+                    color: Colors.grey,
                   ),
                   iconSize: 70,
                   onPressed: () {
                     isSelectedDown = !isSelectedDown;
-                    if (isSelectedDown == true)
+                    callbackLog(curState, "unlike_button", isSelectedDown?"selected":"unselected");
                       isSelectedUp = false;
                     refresh();
                   })),
@@ -52,23 +52,23 @@ class ImagineLike extends ImagineAbstract {
           isSelectedUp
               ? IconButton(
               icon: Icon(FontAwesomeIcons.thumbsUp,
-                  color: Color(0xffe56161)),
+                  color: Color(0xffd650e5)),
               iconSize: 70,
               onPressed: () {
                 isSelectedUp = !isSelectedUp;
-                if (isSelectedUp == true)
+                callbackLog(curState, "like_button", isSelectedUp?"selected":"unselected");
                   isSelectedDown = false;
                 refresh();
               })
               : IconButton(
               icon: Icon(
                 FontAwesomeIcons.thumbsUp,
-                color: Colors.black,
+                color: Colors.grey,
               ),
               iconSize: 70,
               onPressed: () {
                 isSelectedUp = !isSelectedUp;
-                if (isSelectedUp == true)
+                callbackLog(curState, "like_button", isSelectedUp?"selected":"unselected");
                   isSelectedDown = false;
                 refresh();
               }),

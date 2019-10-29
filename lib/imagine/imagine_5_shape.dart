@@ -1,14 +1,21 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'imagine_abstract.dart';
 
 class ImagineHasShape extends ImagineAbstract {
-  ImagineHasShape(String curState, void Function(String, String, String) callback)
-      : super(curState, callback, 'assets/imagine_3.png');
+  ImagineHasShape(String curState, callback, callbackLog)
+      : super(curState, callback, callbackLog, 'assets/imagine_3.png');
 
   bool isYes=false;
   bool isNo=false;
+  @override
+  Future<void> init() async{
+    isYes = false;
+    isNo = false;
+  }
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
@@ -45,6 +52,7 @@ class ImagineHasShape extends ImagineAbstract {
                     onPressed: ()  {
                       isYes=!isYes;
                       isNo=false;
+                      callbackLog(curState, "yes_button", isYes?"selected":"unselected");
                       refresh();
                     },
                   ),
@@ -64,6 +72,7 @@ class ImagineHasShape extends ImagineAbstract {
                     onPressed: () {
                       isYes=false;
                       isNo=!isNo;
+                      callbackLog(curState, "no_button", isNo?"selected":"unselected");
                       refresh();
                     },
                   ),
