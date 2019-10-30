@@ -158,13 +158,13 @@ class MeditatePlay extends MeditateAbstract {
   String getAudio(String d){
     switch(d){
       case "peak":return "peak.mp3";
-      case "breath":return "peak.mp3";
-      case "walk":return "peak.mp3";
-      case "intro":return "peak.mp3";
-      case "mind":return "peak.mp3";
-      case "aware":return "peak.mp3";
-      case "body":return "peak.mp3";
-      case "sound":return "peak.mp3";
+      case "breath":return "breath.mp3";
+      case "walk":return "walk.mp3";
+      case "intro":return "intro.mp3";
+      case "mind":return "mind.mp3";
+      case "aware":return "aware.mp3";
+      case "body":return "body.mp3";
+      case "sound":return "sound.mp3";
     }
     return "peak.mp3";;
 
