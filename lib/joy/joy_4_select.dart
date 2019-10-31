@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +13,10 @@ class Joy4Select extends JoyAbstract {
   @override
   String getData(){
     return res;
+  }
+  @override
+  Future<void> init() async{
+    res="";
   }
 
   @override
