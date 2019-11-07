@@ -43,7 +43,7 @@ class _MainPageState extends State<MainPage>{
   void callbackLog(String page, String event, String action){
     String log = new DateTime.now().toIso8601String()+","+page+","+event+","+action;
     logs.add(log);
-    print("time="+((new DateTime.now()).toIso8601String())+", page="+page+", event="+event+", action="+action);
+    print("time="+((new DateTime.now()).millisecondsSinceEpoch.toString())+", page="+page+", event="+event+", action="+action);
 
 //    print("time="+((new DateTime.now()).millisecondsSinceEpoch.toString())+", page="+page+", event="+event+", action="+action);
   }
