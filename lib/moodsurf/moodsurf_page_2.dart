@@ -29,7 +29,7 @@ class MoodSurfPage2 extends MoodSurfAbstract {
           Container(
             padding: EdgeInsets.only(left: 32.0),
             child: Text(
-                "Imagine your thoughts and\nemotions as a waves.\nThey ebb and flow.\nRising and falling.\nHere they are\nand there\nthey go.",
+                "Imagine your thoughts and\nemotions as waves.\nThey ebb and flow.\nRising and falling.\nHere they are\nand there\nthey go.",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black)),
           ),
