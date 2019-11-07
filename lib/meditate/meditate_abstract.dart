@@ -1,20 +1,110 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widget_abstract.dart';
 
 abstract class MeditateAbstract extends WidgetAbstract {
+  PlayerMode mode = PlayerMode.MEDIA_PLAYER;
+  AudioCache audioCache;
+
+  AudioPlayer _audioPlayer;
+  Duration _duration;
+  Duration _position;
+
+  StreamSubscription _durationSubscription;
+  StreamSubscription _positionSubscription;
+  StreamSubscription _playerCompleteSubscription;
+  String filePath;
+  bool _isPlay = false;
 
   MeditateAbstract(curState, callback, callbackLog, backgroundImage,
       {hasBack = true,hasForward = true,hasVolume = true,hasLowerBar = true}):super(curState, callback, callbackLog, backgroundImage,hasBack: hasBack, hasForward:hasForward, hasVolume:hasVolume, hasLowerBar:hasLowerBar);
 
   Widget myWidget(BuildContext context, Function() refresh);
+  _MeditateAbstractState _meditateAbstractState;
+  @override
+  _MeditateAbstractState createState() {
+    _meditateAbstractState = _MeditateAbstractState();
+    return _meditateAbstractState;
+  }
+  Future<int> _play() async {
+    final playPosition = (_position != null &&
+        _duration != null &&
+        _position.inMilliseconds > 0 &&
+        _position.inMilliseconds < _duration.inMilliseconds)
+        ? _position
+        : null;
+    final result = await _audioPlayer.play(filePath,
+        isLocal: true, position: playPosition);
+    return result;
+  }
+
+  Future<int> _pause() async {
+    final result = await _audioPlayer.pause();
+    if (result == 1) {
+      _isPlay = false;
+      _meditateAbstractState.refresh();
+    }
+    return result;
+  }
+
+  Future<int> _stop() async {
+    int result = 1;
+    if (_audioPlayer != null) result = await _audioPlayer.stop();
+    _isPlay = false;
+    _position = Duration();
+    _meditateAbstractState.refresh();
+    return result;
+  }
 
   @override
-  _MoodSurfAbstractState createState() => _MoodSurfAbstractState();
+  Future<void> init() async {
+    return super.init();
+  }
+  @override
+  Future<void> start() async{
+    await _initAudioPlayer();
+    return super.start();
+  }
+
+  @override
+  Future<void> stop() async {
+    await _stop();
+    await _audioPlayer.release();
+    audioCache.clearCache();
+
+    _durationSubscription?.cancel();
+    _positionSubscription?.cancel();
+    _playerCompleteSubscription?.cancel();
+  }
+
+  Future<void> _initAudioPlayer() async {
+    _audioPlayer = AudioPlayer(mode: mode);
+    audioCache = AudioCache();
+    File f = await audioCache.load(curState + ".mp3");
+    filePath = f.path;
+    _durationSubscription = _audioPlayer.onDurationChanged.listen((duration) {
+      _duration = duration;
+    });
+    _positionSubscription = _audioPlayer.onAudioPositionChanged.listen((p) {
+      _position = p;
+    });
+
+    _playerCompleteSubscription =
+        _audioPlayer.onPlayerCompletion.listen((event) {
+          _isPlay = false;
+          _position = _duration;
+          _meditateAbstractState.refresh();
+        });
+  }
 }
 
-class _MoodSurfAbstractState extends State<MeditateAbstract> {
+class _MeditateAbstractState extends State<MeditateAbstract> {
   void refresh() {
     if(!mounted) return;
     setState(() {
@@ -81,13 +171,22 @@ class _MoodSurfAbstractState extends State<MeditateAbstract> {
                       child: widget.hasVolume?IconButton(
                         alignment: Alignment.center,
                         icon: Icon(
-                          Icons.volume_up,
+                          widget._isPlay
+                              ? Icons.pause
+                              : Icons.volume_up,
                           color: Colors.white,
                         ),
                         iconSize: 50,
                         onPressed: () {
-                          widget.callbackLog(widget.curState, "audio_button", "pressed");
-
+                          widget._isPlay
+                              ? widget._pause()
+                              : widget._play();
+                          widget._isPlay = !widget._isPlay;
+                          widget.callbackLog(
+                              widget.curState,
+                              "audio_button",
+                              widget._isPlay ? "play" : "pause");
+                          setState(() {});
                         },
                       ):Container(),
                     ),

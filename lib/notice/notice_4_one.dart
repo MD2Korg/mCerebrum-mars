@@ -17,6 +17,15 @@ class NoticeExperienceQ extends NoticeAbstract {
       'changing': false,
       'same': false
     };
+    return super.init();
+  }
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
   }
 
   @override

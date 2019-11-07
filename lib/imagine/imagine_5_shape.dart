@@ -12,9 +12,18 @@ class ImagineHasShape extends ImagineAbstract {
   bool isYes=false;
   bool isNo=false;
   @override
-  Future<void> init() async{
+  Future<void> init() {
     isYes = false;
     isNo = false;
+    return super.init();
+  }
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
   }
 
   @override

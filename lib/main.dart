@@ -30,7 +30,8 @@ class _MainPageState extends State<MainPage>{
     p.stop().then((onValue){
       curState =  state.getNextState(prevState, input);
       WidgetAbstract c = state.widgets[curState];
-      if(c!=null && input=="next") c.init();
+      if(c!=null && input=="next")
+        c.init();
 
       curData = data;
       setState(() {

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mars/notice/notice_abstract.dart';
@@ -12,6 +14,15 @@ class NoticeLike extends NoticeAbstract {
   Future<void> init() async{
     isSelectedDown = false;
     isSelectedUp = false;
+    return super.init();
+  }
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
   }
 
   @override

@@ -9,7 +9,7 @@ import 'package:pie_chart/pie_chart.dart';
 
 class Joy5Timer extends JoyAbstract {
   Joy5Timer(String curState, callback, callbackLog)
-      : super(curState, callback, callbackLog, 'assets/joy_0.png');
+      : super(curState, callback, callbackLog, 'assets/joy_0.png', hasVolume:false);
   double curValue = 0;
   bool isRunning = true;
 
@@ -25,7 +25,6 @@ class Joy5Timer extends JoyAbstract {
         return 1.0;
     }
   }
-
   Map<String, double> createDataMap() {
     Map<String, double> dataMap = new Map();
     dataMap.putIfAbsent("Flutter", () => curValue);
@@ -129,6 +128,7 @@ class Joy5Timer extends JoyAbstract {
   Future<void> stop() async {
     if (t != null) t.cancel();
     t = null;
+    return super.stop();
   }
 
   Timer t;
@@ -136,6 +136,7 @@ class Joy5Timer extends JoyAbstract {
   @override
   Future<void> init() async {
     curValue = 0;
+    return super.init();
   }
 
   @override
@@ -151,5 +152,6 @@ class Joy5Timer extends JoyAbstract {
 //        if (refresh != null) refresh();
       }
     });
+    return super.start();
   }
 }

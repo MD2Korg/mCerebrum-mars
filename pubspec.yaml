@@ -81,6 +81,115 @@ flutter:
     - assets/imagine_load_screen.png
     - assets/joy_0.png
     - assets/joy_1.png
+    - assets/moodsurf_0_begin_page.mp3
+    - assets/moodsurf_1_imagine_page.mp3
+    - assets/moodsurf_2_imagine_page.mp3
+    - assets/moodsurf_3_imagine_page.mp3
+    - assets/moodsurf_4_some_page.mp3
+    - assets/moodsurf_5_thinking_page.mp3
+    - assets/moodsurf_6_like_page.mp3
+    - assets/imagine_0_begin_page.mp3
+    - assets/imagine_1_you_page.mp3
+    - assets/imagine_2_take_page.mp3
+    - assets/imagine_3_imaging_page.mp3
+    - assets/imagine_4_color_page.mp3
+    - assets/imagine_5_shape_page.mp3
+    - assets/imagine_6_remember_page.mp3
+    - assets/imagine_7_using_page.mp3
+    - assets/imagine_8_like_page.mp3
+    - assets/meditate_0_begin_page.mp3
+    - assets/meditate_1_menu_page.mp3
+    - assets/meditate_3_like_page.mp3
+    - assets/notice_0_begin_page.mp3
+    - assets/notice_1_this_page.mp3
+    - assets/notice_2_experiencing_page.mp3
+    - assets/notice_3_take_page.mp3
+
+    - assets/notice_3_take_page_tension.mp3
+    - assets/notice_3_take_page_calmness.mp3
+    - assets/notice_3_take_page_shakiness.mp3
+    - assets/notice_3_take_page_stillness.mp3
+    - assets/notice_3_take_page_pain.mp3
+    - assets/notice_3_take_page_warmth.mp3
+    - assets/notice_3_take_page_tightness.mp3
+    - assets/notice_3_take_page_sweatiness.mp3
+    - assets/notice_3_take_page_restlessness.mp3
+    - assets/notice_3_take_page_fluttering.mp3
+    - assets/notice_3_take_page_irritability.mp3
+    - assets/notice_3_take_page_soreness.mp3
+    - assets/notice_3_take_page_other_physical_sensation.mp3
+
+
+    - assets/notice_4_one_page_tension.mp3
+    - assets/notice_4_one_page_calmness.mp3
+    - assets/notice_4_one_page_shakiness.mp3
+    - assets/notice_4_one_page_stillness.mp3
+    - assets/notice_4_one_page_pain.mp3
+    - assets/notice_4_one_page_warmth.mp3
+    - assets/notice_4_one_page_tightness.mp3
+    - assets/notice_4_one_page_sweatiness.mp3
+    - assets/notice_4_one_page_restlessness.mp3
+    - assets/notice_4_one_page_fluttering.mp3
+    - assets/notice_4_one_page_irritability.mp3
+    - assets/notice_4_one_page_soreness.mp3
+    - assets/notice_4_one_page_other_physical_sensation.mp3
+
+    - assets/notice_5_strong_page_tension.mp3
+    - assets/notice_5_strong_page_calmness.mp3
+    - assets/notice_5_strong_page_shakiness.mp3
+    - assets/notice_5_strong_page_stillness.mp3
+    - assets/notice_5_strong_page_pain.mp3
+    - assets/notice_5_strong_page_warmth.mp3
+    - assets/notice_5_strong_page_tightness.mp3
+    - assets/notice_5_strong_page_sweatiness.mp3
+    - assets/notice_5_strong_page_restlessness.mp3
+    - assets/notice_5_strong_page_fluttering.mp3
+    - assets/notice_5_strong_page_irritability.mp3
+    - assets/notice_5_strong_page_soreness.mp3
+    - assets/notice_5_strong_page_other_physical_sensation.mp3
+
+    - assets/notice_6_feel_page_tension.mp3
+    - assets/notice_6_feel_page_calmness.mp3
+    - assets/notice_6_feel_page_shakiness.mp3
+    - assets/notice_6_feel_page_stillness.mp3
+    - assets/notice_6_feel_page_pain.mp3
+    - assets/notice_6_feel_page_warmth.mp3
+    - assets/notice_6_feel_page_tightness.mp3
+    - assets/notice_6_feel_page_sweatiness.mp3
+    - assets/notice_6_feel_page_restlessness.mp3
+    - assets/notice_6_feel_page_fluttering.mp3
+    - assets/notice_6_feel_page_irritability.mp3
+    - assets/notice_6_feel_page_soreness.mp3
+    - assets/notice_6_feel_page_other_physical_sensation.mp3
+
+    - assets/notice_7_mood_page_tension.mp3
+    - assets/notice_7_mood_page_calmness.mp3
+    - assets/notice_7_mood_page_shakiness.mp3
+    - assets/notice_7_mood_page_stillness.mp3
+    - assets/notice_7_mood_page_pain.mp3
+    - assets/notice_7_mood_page_warmth.mp3
+    - assets/notice_7_mood_page_tightness.mp3
+    - assets/notice_7_mood_page_sweatiness.mp3
+    - assets/notice_7_mood_page_restlessness.mp3
+    - assets/notice_7_mood_page_fluttering.mp3
+    - assets/notice_7_mood_page_irritability.mp3
+    - assets/notice_7_mood_page_soreness.mp3
+    - assets/notice_7_mood_page_other_physical_sensation.mp3
+
+#    - assets/notice_4_one_page.mp3
+#    - assets/notice_5_strong_page.mp3
+#    - assets/notice_6_feel_page.mp3
+#    - assets/notice_7_mood_page.mp3
+    - assets/notice_8_notcing_page.mp3
+    - assets/notice_9_like_page.mp3
+    - assets/joy_0_begin_page.mp3
+    - assets/joy_1_deep_page.mp3
+    - assets/joy_2_slowly_page.mp3
+    - assets/joy_3_now_page.mp3
+    - assets/joy_4_select_page.mp3
+    - assets/joy_6_complete_page.mp3
+    - assets/joy_7_whenever_page.mp3
+    - assets/joy_8_like_page.mp3
 
 #    - assets/imagine_logo.png
 #    - assets/notice_white.png

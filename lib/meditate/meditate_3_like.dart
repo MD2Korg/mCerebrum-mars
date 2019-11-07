@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -9,6 +11,21 @@ class MeditateLike extends MeditateAbstract {
 
   bool isSelectedUp = false;
   bool isSelectedDown = false;
+  @override
+  Future<void> init() {
+    isSelectedDown=false;
+    isSelectedUp=false;
+    return super.init();
+  }
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
+  }
+
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
 

@@ -82,7 +82,6 @@ class MyState {
     widgets["meditate_load_page"]=StoryLoadPage("meditate_load_page", callback, callbackLog);
     widgets["imagine_load_page"]=StoryLoadPage("imagine_load_page", callback, callbackLog);
     widgets["notice_load_page"]=StoryLoadPage("notice_load_page", callback, callbackLog);
-    widgets["joy_load_page"]=StoryLoadPage("joy_load_page", callback, callbackLog);
 
     widgets["moodsurf_0_begin_page"]= MoodSurfPage0("moodsurf_0_begin_page", callback, callbackLog);
     widgets["moodsurf_1_imagine_page"]= MoodSurfPage1("moodsurf_1_imagine_page", callback, callbackLog);
@@ -120,6 +119,7 @@ class MyState {
     widgets["meditate_2_play_page"]= MeditatePlay("meditate_2_play_page",callback, callbackLog);
     widgets["meditate_3_like_page"]= MeditateLike("meditate_3_like_page",callback, callbackLog);
 
+    widgets["joy_load_page"]=StoryLoadPage("joy_load_page", callback, callbackLog);
     widgets["joy_0_begin_page"]= Joy0Begin("joy_0_begin_page",callback, callbackLog);
     widgets["joy_1_deep_page"]= Joy1Deep("joy_1_deep_page",callback, callbackLog);
     widgets["joy_2_slowly_page"]= Joy2Slowly("joy_2_slowly_page",callback, callbackLog);
@@ -187,7 +187,6 @@ class MyState {
     transitions.add(Transition("imagine_load_page", "next", "imagine_0_begin_page"));
     transitions.add(Transition("imagine_0_begin_page", "back", "imagine_load_page"));
 
-    transitions.add(Transition("imagine_0_begin_page", "begin", "imagine_1_you_page"));
     transitions.add(Transition("imagine_0_begin_page", "next", "imagine_1_you_page"));
     transitions.add(Transition("imagine_1_you_page", "back", "imagine_0_begin_page"));
 
@@ -219,7 +218,6 @@ class MyState {
     transitions.add(Transition("notice_0_begin_page", "back", "menu_page"));
 
     transitions.add(Transition("notice_0_begin_page", "next", "notice_1_this_page"));
-    transitions.add(Transition("notice_0_begin_page", "begin", "notice_1_this_page"));
     transitions.add(Transition("notice_1_this_page", "back", "notice_0_begin_page"));
 
     transitions.add(Transition("notice_1_this_page", "next", "notice_2_experiencing_page"));

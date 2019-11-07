@@ -13,10 +13,20 @@ class Joy8Like extends JoyAbstract {
   bool isSelectedUp = false;
   bool isSelectedDown = false;
   @override
-  Future<void> init() async {
+  Future<void> init() {
     isSelectedUp = false;
     isSelectedDown = false;
+    return super.init();
   }
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
+  }
+
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
     return Column(

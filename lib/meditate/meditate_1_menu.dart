@@ -5,6 +5,18 @@ import 'meditate_abstract.dart';
 class MeditateMenu extends MeditateAbstract {
   MeditateMenu(String curState, callback, callbackLog)
       : super(curState, callback, callbackLog, 'assets/meditate_1.png',hasBack:false, hasForward:false);
+  @override
+  Future<void> init() {
+    return super.init();
+  }
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
+  }
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {

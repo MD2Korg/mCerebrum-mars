@@ -26,7 +26,16 @@ class NoticeExperience extends NoticeAbstract {
       'soreness': false,
       'other_physical_sensation': false,
     };
+    return super.init();
   }
+   @override
+   Future<void> start() {
+     return super.start();
+   }
+   @override
+   Future<void> stop() {
+     return super.stop();
+   }
 
   NoticeExperience(String curState, callback, callbackLog)
       : super(curState, callback, callbackLog, 'assets/notice_1.png');

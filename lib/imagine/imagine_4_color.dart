@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/block_picker.dart';
 
@@ -9,10 +11,20 @@ class ImagineColorChoose extends ImagineAbstract {
   Color pickerColor = Color(0xffffff);
   Color currentColor = Color(0xffffff);
   @override
-  Future<void> init() async{
+  Future<void> init() {
     pickerColor = Color(0xffffff);
     currentColor = Color(0xffffff);
+    return super.init();
   }
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
+  }
+
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
     return Column(

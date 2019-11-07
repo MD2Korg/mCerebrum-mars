@@ -1,9 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mars/notice/notice_abstract.dart';
 
 class NoticeBegin extends NoticeAbstract {
   NoticeBegin(String curState, callback, callbackLog)
       : super(curState, callback, callbackLog, 'assets/notice_1.png', hasBack:false, hasForward:false);
+  @override
+  Future<void> init() {
+    return super.init();
+  }
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
+  }
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
@@ -41,7 +55,7 @@ class NoticeBegin extends NoticeAbstract {
             ),
             onPressed: () {
               callbackLog(curState, "begin_button", "pressed");
-              callback(curState, "begin",null);
+              callback(curState, "next",null);
             },
           ),
         ),

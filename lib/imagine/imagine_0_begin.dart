@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +8,18 @@ import 'imagine_abstract.dart';
 class Imagine0Begin extends ImagineAbstract {
   Imagine0Begin(String curState, callback, callbackLog)
       : super(curState, callback, callbackLog, 'assets/imagine_1.png', hasBack:false, hasForward:false);
+  @override
+  Future<void> init() {
+    return super.init();
+  }
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
+  }
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
@@ -44,7 +58,7 @@ class Imagine0Begin extends ImagineAbstract {
                     ),
                     onPressed: () {
                       callbackLog(curState, "begin_button", "pressed");
-                      callback(curState, "begin",null);
+                      callback(curState, "next",null);
                     },
                   ),
                 ),

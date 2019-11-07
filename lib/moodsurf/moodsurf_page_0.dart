@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +10,18 @@ class MoodSurfPage0 extends MoodSurfAbstract {
   MoodSurfPage0(String curState, callback, callbackLog)
       : super(curState, callback, callbackLog, 'assets/moodsurf_1.png', hasBack:false, hasForward:false);
 
+  @override
+  Future<void> init() {
+    return super.init();
+  }
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
+  }
   @override
   Widget myWidget(BuildContext context, Function() refresh) {
     return Column(

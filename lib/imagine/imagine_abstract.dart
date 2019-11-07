@@ -1,31 +1,130 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widget_abstract.dart';
 
 abstract class ImagineAbstract extends WidgetAbstract {
+  PlayerMode mode = PlayerMode.MEDIA_PLAYER;
+  AudioCache audioCache;
+
+  AudioPlayer _audioPlayer;
+  Duration _duration;
+  Duration _position;
+
+  StreamSubscription _durationSubscription;
+  StreamSubscription _positionSubscription;
+  StreamSubscription _playerCompleteSubscription;
+  String filePath;
+  bool _isPlay = false;
+
   ImagineAbstract(curState, callback, callbackLog, backgroundImage,
-      {hasBack = true,hasForward = true,hasVolume = true,hasLowerBar = true}):super(curState, callback, callbackLog, backgroundImage,hasBack: hasBack, hasForward:hasForward, hasVolume:hasVolume, hasLowerBar:hasLowerBar);
+      {hasBack = true, hasForward = true, hasVolume = true, hasLowerBar = true})
+      : super(curState, callback, callbackLog, backgroundImage,
+            hasBack: hasBack,
+            hasForward: hasForward,
+            hasVolume: hasVolume,
+            hasLowerBar: hasLowerBar);
 
   Widget myWidget(BuildContext context, Function() refresh);
 
+  _ImagineAbstractState _imagineAbstractState;
+
   @override
-  _ImagineAbstractState createState() => _ImagineAbstractState();
+  _ImagineAbstractState createState() {
+    _imagineAbstractState = _ImagineAbstractState();
+    return _imagineAbstractState;
+  }
+
+  Future<int> _play() async {
+    final playPosition = (_position != null &&
+            _duration != null &&
+            _position.inMilliseconds > 0 &&
+            _position.inMilliseconds < _duration.inMilliseconds)
+        ? _position
+        : null;
+    final result = await _audioPlayer.play(filePath,
+        isLocal: true, position: playPosition);
+    return result;
+  }
+
+  Future<int> _pause() async {
+    final result = await _audioPlayer.pause();
+    if (result == 1) {
+      _isPlay = false;
+      _imagineAbstractState.refresh();
+    }
+    return result;
+  }
+
+  Future<int> _stop() async {
+    int result = 1;
+    if (_audioPlayer != null) result = await _audioPlayer.stop();
+    _isPlay = false;
+    _position = Duration();
+    _imagineAbstractState.refresh();
+    return result;
+  }
+
+  @override
+  Future<void> init() async {
+    return super.init();
+  }
+  @override
+  Future<void> start() async{
+    await _initAudioPlayer();
+    return super.start();
+  }
+
+  @override
+  Future<void> stop() async {
+    await _stop();
+    await _audioPlayer.release();
+    audioCache.clearCache();
+
+    _durationSubscription?.cancel();
+    _positionSubscription?.cancel();
+    _playerCompleteSubscription?.cancel();
+  }
+
+  Future<void> _initAudioPlayer() async {
+    _audioPlayer = AudioPlayer(mode: mode);
+    audioCache = AudioCache();
+    File f = await audioCache.load(curState + ".mp3");
+    filePath = f.path;
+    _durationSubscription = _audioPlayer.onDurationChanged.listen((duration) {
+      _duration = duration;
+    });
+    _positionSubscription = _audioPlayer.onAudioPositionChanged.listen((p) {
+      _position = p;
+    });
+
+    _playerCompleteSubscription =
+        _audioPlayer.onPlayerCompletion.listen((event) {
+      _isPlay = false;
+      _position = _duration;
+      _imagineAbstractState.refresh();
+    });
+  }
 }
 
 class _ImagineAbstractState extends State<ImagineAbstract> {
   void refresh() {
-    if(!mounted) return;
-    setState(() {
-    });
+    if (!mounted) return;
+    setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return new WillPopScope(
         onWillPop: () async {
           widget.callbackLog(widget.curState, "back_button", "pressed");
-          widget.callback(widget.curState, "back",null);
+          widget.callback(widget.curState, "back", null);
           return false;
         },
         child: Scaffold(
@@ -38,19 +137,19 @@ class _ImagineAbstractState extends State<ImagineAbstract> {
               fit: BoxFit.cover,
             ),
           ),
-          Container(child:
-          FlatButton(
-            child: Icon(
-              CupertinoIcons.home,
-              size: 48,
+          Container(
+            child: FlatButton(
+              child: Icon(
+                CupertinoIcons.home,
+                size: 48,
+              ),
+              highlightColor: Colors.white,
+              focusColor: Colors.white,
+              onPressed: () {
+                widget.callbackLog(widget.curState, "home_button", "pressed");
+                showAlertDialog(context);
+              },
             ),
-            highlightColor: Colors.white,
-            focusColor: Colors.white,
-            onPressed: (){
-              widget.callbackLog(widget.curState, "home_button", "pressed");
-              showAlertDialog(context);
-            },
-          ),
           ),
           Container(
             child: Column(
@@ -58,92 +157,120 @@ class _ImagineAbstractState extends State<ImagineAbstract> {
                 Expanded(
                   child: widget.myWidget(context, refresh),
                 ),
-                widget.hasLowerBar?
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: widget.hasBack?IconButton(
-                        alignment: Alignment.bottomLeft,
-                        icon: Icon(
-                          CupertinoIcons.left_chevron,
-                          color: Colors.grey,
-                        ),
-                        iconSize: 60,
-                        onPressed: () {
-                          widget.callbackLog(widget.curState, "back_button", "pressed");
-                          widget.callback(widget.curState, "back",null);
-                        },
-                      ):Container(),
-                    ),
-                    Expanded(
-                      child: widget.hasVolume?IconButton(
-                        alignment: Alignment.center,
-                        icon: Icon(
-                          Icons.volume_up,
-                          color: Colors.grey,
-                        ),
-                        iconSize: 50,
-                        onPressed: () {
-                          widget.callbackLog(widget.curState, "audio_button", "pressed");
-                        },
-                      ):Container(),
-                    ),
-                    Expanded(
-                      child: widget.hasForward?IconButton(
-                        alignment: Alignment.bottomRight,
-                        icon: Icon(
-                          CupertinoIcons.right_chevron,
-                          color: Colors.grey,
-                        ),
-                        iconSize: 60,
-                        onPressed: () {
-                          widget.callbackLog(widget.curState, "next_button", "pressed");
-                          widget.callback(widget.curState, "next",null);
-                        },
-                      ):Container(),
-                    ),
-                  ],
-                ):Container(),
+                widget.hasLowerBar
+                    ? Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: widget.hasBack
+                                ? IconButton(
+                                    alignment: Alignment.bottomLeft,
+                                    icon: Icon(
+                                      CupertinoIcons.left_chevron,
+                                      color: Colors.grey,
+                                    ),
+                                    iconSize: 60,
+                                    onPressed: () {
+                                      widget.callbackLog(widget.curState,
+                                          "back_button", "pressed");
+                                      widget.callback(
+                                          widget.curState, "back", null);
+                                    },
+                                  )
+                                : Container(),
+                          ),
+                          Expanded(
+                            child: widget.hasVolume
+                                ? IconButton(
+                                    alignment: Alignment.center,
+                                    icon: Icon(
+                                      widget._isPlay
+                                          ? Icons.pause
+                                          : Icons.volume_up,
+                                      color: Colors.grey,
+                                    ),
+                                    iconSize: 50,
+                                    onPressed: () {
+                                      widget._isPlay
+                                          ? widget._pause()
+                                          : widget._play();
+                                      widget._isPlay = !widget._isPlay;
+                                      widget.callbackLog(
+                                          widget.curState,
+                                          "audio_button",
+                                          widget._isPlay ? "play" : "pause");
+                                      setState(() {});
+                                    },
+                                  )
+                                : Container(),
+                          ),
+                          Expanded(
+                            child: widget.hasForward
+                                ? IconButton(
+                                    alignment: Alignment.bottomRight,
+                                    icon: Icon(
+                                      CupertinoIcons.right_chevron,
+                                      color: Colors.grey,
+                                    ),
+                                    iconSize: 60,
+                                    onPressed: () {
+                                      widget.callbackLog(widget.curState,
+                                          "next_button", "pressed");
+                                      widget.callback(
+                                          widget.curState, "next", null);
+                                    },
+                                  )
+                                : Container(),
+                          ),
+                        ],
+                      )
+                    : Container(),
               ],
             ),
           )
         ])));
   }
-  showAlertDialog(BuildContext context) {
 
+  showAlertDialog(BuildContext context) {
     // set up the button
     Widget yesButton = FlatButton(
       color: Color(0xffff7d7d),
-      shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
-      child: Text("Yes", style: TextStyle(color: Colors.white, fontSize: 18),),
+      shape:
+          RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
+      child: Text(
+        "Yes",
+        style: TextStyle(color: Colors.white, fontSize: 18),
+      ),
       onPressed: () {
         widget.callbackLog(widget.curState, "quit_exercise", "yes pressed");
-        widget.callback(widget.curState, "home",null);
+        widget.callback(widget.curState, "home", null);
         Navigator.of(context).pop(); // dismiss dialog
-
       },
     );
     Widget noButton = FlatButton(
       color: Colors.grey,
-      shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
-      child: Text("No", style: TextStyle(color: Colors.white, fontSize: 18),),
+      shape:
+          RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
+      child: Text(
+        "No",
+        style: TextStyle(color: Colors.white, fontSize: 18),
+      ),
       onPressed: () {
         widget.callbackLog(widget.curState, "quit_exercise", "no pressed");
         Navigator.of(context).pop(); // dismiss dialog
-
       },
     );
 
     AlertDialog alert = AlertDialog(
-      title: Text("Quit Exercise?", textAlign: TextAlign.center,),
+      title: Text(
+        "Quit Exercise?",
+        textAlign: TextAlign.center,
+      ),
       content: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          yesButton,
-          noButton
-        ],
+        children: <Widget>[yesButton, noButton],
       ),
-    shape: RoundedRectangleBorder(side: BorderSide(), borderRadius: new BorderRadius.circular(8.0)),
+      shape: RoundedRectangleBorder(
+          side: BorderSide(), borderRadius: new BorderRadius.circular(8.0)),
       backgroundColor: Color(0xfff2f9ff),
     );
 

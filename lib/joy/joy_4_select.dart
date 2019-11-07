@@ -15,8 +15,17 @@ class Joy4Select extends JoyAbstract {
     return res;
   }
   @override
-  Future<void> init() async{
-    res="";
+  Future<void> init() {
+    res = "";
+    return super.init();
+  }
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
   }
 
   @override

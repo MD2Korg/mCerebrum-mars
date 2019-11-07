@@ -12,6 +12,14 @@ class ImagineResponse extends ImagineAbstract {
   bool isSmooth = false, isRough = false;
   bool isSoft = false, isHard = false;
   bool isLight = false, isHeavy = false;
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
+  }
 
   @override
   Future<void> init() async{
@@ -23,6 +31,7 @@ class ImagineResponse extends ImagineAbstract {
     isHard = false;
     isLight = false;
     isHeavy = false;
+    return super.init();
   }
   @override
   Widget myWidget(BuildContext context, Function() refresh) {

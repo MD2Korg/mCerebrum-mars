@@ -47,9 +47,7 @@ class MeditatePlay extends MeditateAbstract {
 
 
   MeditatePlay(String curState, callback, callbackLog)
-      : super(curState, callback, callbackLog, 'assets/meditate_2.png', hasBack:true, hasForward:true, hasVolume:false){
-
-  }
+      : super(curState, callback, callbackLog, 'assets/meditate_2.png', hasBack:true, hasForward:true, hasVolume:false);
 
   @override
   Widget myWidget(BuildContext context, Function() refresh) {

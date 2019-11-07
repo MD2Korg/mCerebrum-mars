@@ -12,9 +12,18 @@ class ImagineLike extends ImagineAbstract {
   bool isSelectedUp = false;
   bool isSelectedDown = false;
   @override
-  Future<void> init() async{
+  Future<void> init() {
     isSelectedUp = false;
     isSelectedDown = false;
+    return super.init();
+  }
+  @override
+  Future<void> start() {
+    return super.start();
+  }
+  @override
+  Future<void> stop() {
+    return super.stop();
   }
 
   @override
